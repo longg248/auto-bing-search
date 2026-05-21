@@ -3,63 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trình Tự Động Tìm Kiếm Bing Ngẫu Nhiên (Bản Tối Ưu Hóa Điểm Số)</title>
-    <!-- Nhúng thư viện Tailwind CSS để thiết kế giao diện hiện đại -->
+    <title>Bing Auto-Searcher v3.0 (Anti-AI Bypass)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Nhúng thư viện Lucide Icons để sử dụng các biểu tượng đẹp mắt -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* Tùy chỉnh thanh cuộn cho mượt mà hơn */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
-        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        .toast-enter { animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes toastIn { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between font-sans">
 
     <!-- Header -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 p-2 rounded-xl text-white shadow-lg shadow-blue-500/20">
-                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 p-2.5 rounded-xl text-white shadow-lg shadow-blue-500/20">
+                    <i data-lucide="zap" class="w-6 h-6 animate-pulse"></i>
                 </div>
                 <div>
                     <h1 class="font-bold text-lg leading-tight flex items-center gap-2">
-                        Bing Auto-Searcher v2.0 
-                        <span class="text-xxs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded font-mono">Bypass Fix</span>
+                        Bing Auto-Searcher v3.0 
+                        <span class="text-[10px] bg-blue-500/20 text-blue-400 border border-blue-500/30 px-1.5 py-0.5 rounded font-mono">Bypass AI</span>
                     </h1>
-                    <p class="text-xs text-slate-400">Đã tối ưu ẩn danh và chống cơ chế chặn điểm Microsoft Rewards</p>
+                    <p class="text-xs text-slate-400">Học tập công nghệ từ BingReward • Tự động hoàn toàn</p>
                 </div>
             </div>
-            <div id="status-badge" class="flex items-center gap-2 text-xs bg-slate-800 px-3 py-1.5 rounded-full text-slate-300">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span id="status-text">Sẵn sàng hoạt động</span>
+            <div class="flex items-center gap-2 text-xs bg-slate-800 px-3 py-1.5 rounded-full text-slate-300 border border-slate-700">
+                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                <span id="status-text">Đã tối ưu hóa thuật toán 2026</span>
             </div>
         </div>
     </header>
 
     <!-- Tab Navigation -->
     <div class="max-w-5xl w-full mx-auto px-4 mt-6">
-        <div class="bg-slate-950 p-1.5 rounded-xl border border-slate-800 flex gap-2">
+        <div class="bg-slate-950 p-1.5 rounded-xl border border-slate-800 flex flex-col sm:flex-row gap-2">
             <button id="tab-auto-btn" class="flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-900/20">
-                <i data-lucide="cpu" class="w-4 h-4"></i>
-                Chạy tự động hoàn toàn
+                <i data-lucide="play" class="w-4 h-4"></i>
+                Tự Động Tìm Kiếm (Auto 15s)
             </button>
-            <button id="tab-manual-btn" class="flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200">
-                <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i>
-                Click tay an toàn 100% (Khuyên dùng)
+            <button id="tab-super-btn" class="flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+                Copy-Paste Vô Hình (Trùm Cuối)
             </button>
         </div>
     </div>
@@ -67,523 +56,459 @@
     <!-- Main Content -->
     <main class="max-w-5xl w-full mx-auto px-4 py-6 flex-grow grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        <!-- Cột trái: Điều khiển (Chạy Tự động) -->
+        <!-- Cột trái: Bảng Điều Khiển Auto 15s -->
         <div id="panel-auto" class="lg:col-span-1 flex flex-col gap-6">
-            <!-- Bảng điều khiển Tự động -->
-            <div class="bg-slate-850 border border-slate-800 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl">
-                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                    <i data-lucide="sliders" class="w-4 h-4 text-blue-500"></i> Trạng thái & Thiết lập
-                </h2>
+            <div class="bg-slate-850 border border-slate-800 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
                 
+                <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-2">
+                    <i data-lucide="cpu" class="w-4 h-4 text-blue-400"></i> Cấu hình Auto 15s
+                </h2>
+                <p class="text-[11px] text-slate-400 mb-5 leading-relaxed">Sử dụng cơ chế <strong>Single-Tab</strong> của bingreward.com: Chỉ mở và điều hướng trên đúng 1 tab duy nhất để qua mặt bộ quét bot của Microsoft.</p>
+
                 <!-- Vòng tròn đếm ngược -->
-                <div class="relative w-40 h-40 mx-auto my-4 flex items-center justify-center">
+                <div class="relative w-36 h-36 mx-auto my-4 flex items-center justify-center">
                     <svg class="w-full h-full transform -rotate-90">
-                        <circle cx="80" cy="80" r="70" class="stroke-slate-800" stroke-width="6" fill="transparent" />
-                        <circle id="progress-bar" cx="80" cy="80" r="70" class="stroke-blue-500 transition-all duration-1000 ease-linear" stroke-width="6" fill="transparent" stroke-dasharray="440" stroke-dashoffset="0" />
+                        <circle cx="72" cy="72" r="62" class="stroke-slate-800" stroke-width="6" fill="transparent" />
+                        <circle id="progress-bar" cx="72" cy="72" r="62" class="stroke-blue-500 transition-all duration-1000 ease-linear" stroke-width="6" fill="transparent" stroke-dasharray="390" stroke-dashoffset="0" />
                     </svg>
                     <div class="absolute flex flex-col items-center">
-                        <span id="countdown-text" class="text-3xl font-extrabold tracking-tight text-blue-400">15s</span>
-                        <span class="text-[10px] uppercase text-slate-400 mt-1 tracking-wider">tiếp theo</span>
+                        <span id="countdown-text" class="text-3xl font-extrabold tracking-tight">15s</span>
+                        <span class="text-[9px] uppercase text-slate-400 mt-1">Đang dừng</span>
                     </div>
                 </div>
 
-                <!-- Các nút điều khiển chính -->
-                <div class="flex flex-col gap-2.5">
-                    <button id="btn-toggle" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-900/30 active:scale-[0.98]">
-                        <i data-lucide="play" class="w-5 h-5"></i>
-                        <span>Bắt đầu tự động</span>
+                <!-- Các nút điều khiển -->
+                <div class="flex flex-col gap-3">
+                    <button id="btn-toggle-auto" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-900/30 active:scale-[0.98]">
+                        <i data-lucide="play-circle" class="w-5 h-5"></i>
+                        <span>Bắt Đầu Auto</span>
                     </button>
                     
-                    <button id="btn-trigger" class="w-full bg-slate-800 hover:bg-slate-750 text-slate-200 font-medium py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition-all active:scale-[0.98]">
+                    <button id="btn-trigger-single" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition-all active:scale-[0.98]">
                         <i data-lucide="shuffle" class="w-4 h-4"></i>
-                        <span>Tìm ngẫu nhiên ngay</span>
+                        <span>Tìm Ngẫu Nhiên Ngay</span>
                     </button>
                 </div>
 
-                <!-- Thiết lập giãn cách -->
-                <div class="mt-6 pt-5 border-t border-slate-800/80">
-                    <div class="flex items-center justify-between mb-2">
-                        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Thời gian giãn cách (giây)</label>
-                        <button id="btn-rewards-bypass" class="text-[10px] bg-red-950/80 text-red-400 border border-red-800/50 px-2 py-0.5 rounded-full font-bold hover:bg-red-900 transition-all">
-                            Chống Block: TẮT
-                        </button>
+                <!-- Cấu hình giãn cách -->
+                <div class="mt-5 pt-5 border-t border-slate-800 flex flex-col gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Thời gian giãn cách</label>
+                        <select id="select-interval" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-300 text-xs focus:outline-none focus:border-blue-500">
+                            <option value="10">10 giây (Tốc độ cao)</option>
+                            <option value="15" selected>15 giây (Mặc định)</option>
+                            <option value="30">30 giây (An toàn hơn)</option>
+                            <option value="random">Ngẫu nhiên từ 15s - 45s (Khuyên dùng)</option>
+                        </select>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <input type="number" id="input-interval" value="15" min="5" max="1800" class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 w-24 text-center text-blue-400 font-semibold focus:outline-none focus:border-blue-500">
-                        <span id="interval-tip" class="text-xs text-slate-400">Tối thiểu đề nghị: 15s</span>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Giới hạn số lượt tìm</label>
+                        <input type="number" id="input-limit" value="30" min="1" max="100" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-300 text-xs focus:outline-none focus:border-blue-500">
                     </div>
                 </div>
             </div>
-
-            <!-- Cảnh báo cơ chế điểm số -->
-            <div class="bg-red-950/20 border border-red-900/50 p-5 rounded-2xl text-red-200/90 text-xs leading-relaxed">
-                <div class="flex gap-2 items-start mb-2 font-bold text-red-400 text-sm">
-                    <i data-lucide="shield-alert" class="w-5 h-5 shrink-0"></i>
-                    <span>Cơ chế Cooldown mới 2026</span>
+            
+            <div class="bg-blue-950/20 border border-blue-900/50 p-5 rounded-2xl text-blue-200/90 text-xs leading-relaxed">
+                <div class="flex gap-2 items-start mb-2 font-bold text-blue-400 text-sm">
+                    <i data-lucide="help-circle" class="w-5 h-5 shrink-0"></i>
+                    <span>Cách cày điểm Mobile</span>
                 </div>
-                Hệ thống Microsoft Rewards áp dụng bộ lọc: <strong>Chỉ cho phép nhận tối đa 3 lần tìm kiếm trong vòng 15 phút</strong>. 
-                <p class="mt-1">Nếu cày tự động liên tục 15s, điểm số sẽ <strong>bị khóa tạm thời</strong> ngay lập tức. Hãy bật nút <strong class="text-red-400">"Chống Block"</strong> ở trên để tự động cấu hình giãn cách an toàn!</p>
+                Để cày điểm Mobile ngay trên PC: Hãy nhấn phím <kbd class="bg-slate-700 px-1.5 py-0.5 rounded text-slate-200 font-mono text-[10px]">F12</kbd> -> bấm vào biểu tượng <strong>Thiết bị di động</strong> ở góc trên thanh công cụ -> Chọn một mẫu điện thoại bất kỳ (Ví dụ: iPhone 12 Pro) -> F5 lại trang này rồi bấm Bắt Đầu Auto!
             </div>
         </div>
 
-        <!-- Cột trái thay thế: Bảng Click Thủ công (Khi chọn Tab 2) -->
-        <div id="panel-manual" class="lg:col-span-1 hidden flex flex-col gap-6">
-            <div class="bg-slate-850 border border-slate-800 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl">
-                <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2">
-                    <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-emerald-400"></i> Bảng Click An Toàn 100%
+        <!-- Cột trái thay thế: Bảng Copy-Paste Vô Hình -->
+        <div id="panel-super" class="lg:col-span-1 hidden flex flex-col gap-6">
+            <div class="bg-slate-850 border border-violet-900/50 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-500 to-fuchsia-500"></div>
+                
+                <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-2">
+                    <i data-lucide="user-check" class="w-4 h-4 text-violet-400"></i> Sao chép rảnh tay
                 </h2>
-                <p class="text-xs text-slate-400 mb-5 leading-relaxed">Click tay trực tiếp là phương pháp an toàn tuyệt đối. Hệ thống tự động tạo các lượt click thật chống phát hiện, bạn chỉ cần click lần lượt vào 3 nút dưới đây để ăn trọn điểm!</p>
+                <p class="text-[11px] text-slate-400 mb-5 leading-relaxed">Hệ thống sẽ <strong>Tự Động Copy</strong> từ khóa và mở trang chủ Bing sạch. Bạn chỉ cần bấm <kbd class="bg-slate-700 px-1.5 py-0.5 rounded text-slate-200 font-mono text-[10px]">Ctrl+V</kbd> và <kbd class="bg-slate-700 px-1.5 py-0.5 rounded text-slate-200 font-mono text-[10px]">Enter</kbd>. An toàn tuyệt đối 100%!</p>
 
-                <!-- Vùng chứa các nút click -->
-                <div class="flex flex-col gap-3.5" id="manual-links-container">
+                <div class="flex flex-col gap-3" id="super-links-container">
                     <!-- Tạo tự động từ JS -->
                 </div>
 
-                <button id="btn-refresh-manual" class="w-full mt-4 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition-all">
+                <button id="btn-refresh-super" class="w-full mt-4 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition-all">
                     <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
                     Đổi 3 từ khóa mới
                 </button>
             </div>
-
-            <div class="bg-emerald-950/20 border border-emerald-900/50 p-5 rounded-2xl text-emerald-200/90 text-xs leading-relaxed">
-                <div class="flex gap-2 items-start mb-2 font-bold text-emerald-400 text-sm">
-                    <i data-lucide="smile" class="w-5 h-5 shrink-0"></i>
-                    <span>Tại sao cách này luôn được cộng điểm?</span>
-                </div>
-                Hành động click chuột trực tiếp của bạn tạo ra sự kiện click thật trên trình duyệt. Đồng thời, công nghệ xóa thông tin liên kết ngược của chúng tôi đảm bảo Bing không biết bạn truy cập từ công cụ ngoài. Hãy click thả ga!
-            </div>
         </div>
 
-        <!-- Cột phải: Quản lý danh sách từ khóa tìm kiếm -->
+        <!-- Cột phải: Quản lý & Lịch sử -->
         <div class="lg:col-span-2 flex flex-col gap-6">
-            <div class="bg-slate-850 border border-slate-800 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl flex flex-col h-full">
+            <!-- Kho từ khóa -->
+            <div class="bg-slate-850 border border-slate-800 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl flex flex-col h-[380px]">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                     <div>
                         <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-2">
-                            <i data-lucide="list-music" class="w-4 h-4 text-blue-500"></i> Kho từ khóa ngẫu nhiên
+                            <i data-lucide="database" class="w-4 h-4 text-emerald-500"></i> Kho dữ liệu từ khóa mẫu
                         </h2>
-                        <p class="text-xs text-slate-500 mt-0.5">Lựa chọn ngẫu nhiên từ khóa để tối ưu mức độ đa dạng tìm kiếm</p>
                     </div>
-                    <span id="keyword-count" class="self-start bg-blue-900/40 border border-blue-800/50 text-blue-300 text-xs px-2.5 py-1 rounded-full font-semibold">0 từ khóa</span>
+                    <span id="keyword-count" class="self-start bg-slate-800 border border-slate-700 text-slate-300 text-xs px-2.5 py-1 rounded-full font-semibold">0 từ khóa</span>
                 </div>
 
-                <!-- Nhập từ khóa mới -->
                 <div class="flex gap-2 mb-4">
-                    <input type="text" id="input-new-keyword" placeholder="Nhập từ khóa tùy chỉnh mới..." class="flex-grow bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500 transition-all text-sm">
-                    <button id="btn-add" class="bg-slate-850 hover:bg-slate-750 text-white px-4 rounded-xl border border-slate-700 flex items-center justify-center transition-all">
+                    <input type="text" id="input-new-keyword" placeholder="Thêm từ khóa chống trùng lặp..." class="flex-grow bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500 transition-all text-sm">
+                    <button id="btn-add" class="bg-slate-800 hover:bg-slate-700 text-white px-4 rounded-xl border border-slate-700 flex items-center justify-center transition-all">
                         <i data-lucide="plus" class="w-5 h-5"></i>
                     </button>
                 </div>
 
-                <!-- Vùng hiển thị danh sách từ khóa -->
-                <div class="flex-grow overflow-y-auto max-h-[250px] border border-slate-800/80 rounded-xl bg-slate-950/80 p-3 flex flex-wrap gap-2 items-start content-start" id="keyword-container">
-                    <!-- Danh sách các thẻ từ khóa -->
+                <div class="flex-grow overflow-y-auto border border-slate-800/80 rounded-xl bg-slate-950/80 p-3 flex flex-wrap gap-2 items-start content-start" id="keyword-container">
+                    <!-- Keywords injected here -->
                 </div>
 
-                <!-- Nút khôi phục từ khóa mẫu -->
-                <div class="mt-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-                    <span class="text-xxs text-slate-500">Mẹo: Danh sách càng dài, tính ngẫu nhiên càng cao và càng khó bị phát hiện.</span>
-                    <button id="btn-reset-keywords" class="text-xs text-slate-400 hover:text-red-400 flex items-center gap-1.5 transition-all">
-                        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-                        Khôi phục danh sách mẫu (500 từ)
+                <div class="mt-4 flex justify-end">
+                    <button id="btn-reset-keywords" class="text-xs text-slate-400 hover:text-blue-400 flex items-center gap-1.5 transition-all">
+                        <i data-lucide="refresh-ccw" class="w-3.5 h-3.5"></i>
+                        Nạp lại danh sách từ khóa đa dạng
                     </button>
                 </div>
             </div>
 
-            <!-- Nhật ký tìm kiếm (History) -->
+            <!-- Nhật ký -->
             <div class="bg-slate-850 border border-slate-850 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <i data-lucide="history" class="w-4 h-4 text-blue-500"></i> Lịch sử tìm kiếm gần đây
+                    <i data-lucide="activity" class="w-4 h-4 text-blue-500"></i> Nhật ký phiên thao tác
                 </h2>
                 <div class="bg-slate-950 border border-slate-800 rounded-xl max-h-[140px] overflow-y-auto p-4 font-mono text-xs text-slate-400" id="search-log">
-                    <div class="text-slate-500 italic">Chưa thực hiện lượt tìm kiếm nào...</div>
+                    <div class="text-slate-600 italic">Chưa thực hiện lệnh nào...</div>
                 </div>
             </div>
         </div>
 
     </main>
 
+    <!-- Toast Notification (Popup thông báo) -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-800 border-l-4 border-blue-500 text-slate-200 px-6 py-4 rounded shadow-2xl hidden items-center gap-3 z-50">
+        <i data-lucide="check-circle" class="w-5 h-5 text-blue-400"></i>
+        <div>
+            <p class="text-sm font-bold">Đã Copy thành công!</p>
+            <p class="text-[11px] text-slate-400">Trang chủ Bing đang mở, hãy dán (Ctrl+V) vào ô tìm kiếm.</p>
+        </div>
+    </div>
+
     <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-950/80 py-4 text-center text-xs text-slate-500">
-        <p>© 2026 Bing Auto-Searcher. Mã nguồn tối ưu hóa an toàn tuyệt mật.</p>
+    <footer class="border-t border-slate-800 bg-slate-950/85 py-4 text-center text-[11px] text-slate-500">
+        <p>© 2026 Bing Auto-Searcher v3.0 • Khuyên dùng chạy trên GitHub Pages để có hiệu quả tối ưu nhất!</p>
     </footer>
 
-    <!-- Script điều khiển Logic -->
     <script>
-        // Khởi tạo các từ khóa mặc định (Đầy đủ 500 từ khóa Việt hóa đa dạng chủ đề)
+        // Default Keywords (100 đa dạng từ khóa mẫu chống trùng lặp)
         const defaultKeywords = [
-            // KHOA HỌC & VŨ TRỤ
-            "thuyết tương đối rộng của einstein", "sao hỏa có nước không", "hố đen vũ trụ là gì", "dải ngân hà có bao nhiêu ngôi sao", "kính viễn vọng james webb", "sự hình thành hệ mặt trời", "sao mộc có bao nhiêu mặt trăng", "hiện tượng nhật thực toàn phần", "nguyệt thực nửa tối là gì", "sao băng từ đâu đến", "huyết áp người bình thường", "vũ trụ giãn nở như thế nào", "sóng hấp dẫn là gì", "nguyên lý bất định heisenberg", "cơ học lượng tử cơ bản", "sự sống ngoài trái đất", "các hành tinh đá trong hệ mặt trời", "khí quyển của sao kim", "tại sao bầu trời có màu xanh", "cách hoạt động của nam châm", "lực vạn vật hấp dẫn", "thuyết bing bang ra đời khi nào", "chu kỳ hoạt động của mặt trời", "bão mặt trời ảnh hưởng gì trái đất", "tốc độ ánh sáng là bao nhiêu", "năm ánh sáng tính thế nào", "khoảng cách từ trái đất đến mặt trăng", "mặt trăng có tự quay không", "cấu tạo của lõi trái đất", "hiện tượng cực quang ở đâu đẹp", "tại sao biển lại mặn", "vòng tuần hoàn của nước", "quang hợp ở thực vật là gì", "chuỗi thức ăn trong tự nhiên", "hệ sinh thái biển sâu", "sinh vật lưỡng cư tiêu biểu", "khủng long tuyệt chủng khi nào", "thời kỳ băng hà gần nhất", "sự tiến hóa của loài người", "gen di truyền hoạt động thế nào", "cấu trúc phân tử dna", "vắc xin bảo vệ cơ thể thế nào", "vi khuẩn và virus khác nhau gì", "hệ miễn dịch của con người", "tế bào gốc có tác dụng gì", "chất bán dẫn hoạt động thế nào", "nguyên lý hoạt động của laser", "áp suất khí quyển là gì", "hiệu ứng nhà kính tác hại thế nào", "biến đổi khí hậu toàn cầu",
-            // CÔNG NGHỆ & LẬP TRÌNH
-            "xu hướng trí tuệ nhân tạo 2026", "máy tính lượng tử thương mại", "cách bảo mật wifi gia đình", "ngôn ngữ lập trình dễ học nhất", "tự học python trong 30 ngày", "thuật toán tìm kiếm đường đi ngắn nhất", "cách hoạt động của blockchain", "ví điện tử hoạt động thế nào", "tiền mã hóa bitcoin là gì", "mạng 5g khác gì 4g", "tương lai của metaverse", "kính thực tế ảo htc vive", "review iphone mới nhất", "samsung galaxy ultra đánh giá", "điện thoại gập tốt nhất hiện nay", "bàn phím cơ không dây bluetooth", "chuột công thái học logitech", "màn hình oled cho máy tính", "card đồ họa chơi game tốt nhất", "ổ cứng di động chống sốc", "lắp ráp máy tính pc gaming", "tối ưu hóa win 11 mượt mà", "cách diệt virus máy tính", "phần mềm khôi phục dữ liệu", "học lập trình javascript cơ bản", "reactjs vs angular so sánh", "thiết kế web responsive", "tối ưu seo onpage", "công cụ phân tích website", "google analytics 4 hướng dẫn", "chạy quảng cáo facebook ads hiệu quả", "tối ưu chi phí google ads", "marketing trên tik tok", "cách tạo kênh youtube triệu view", "lập trình ứng dụng flutter", "swift lập trình ios", "kotlin cho người mới học android", "lập trình nhúng arduino", "raspberry pi làm được gì", "mô hình nhà thông minh", "khóa cửa thông minh vân tay", "robot hút bụi lau nhà loại nào tốt", "thiết bị định vị gps siêu nhỏ", "camera hành trình ô tô tốt nhất", "máy chiếu mini bỏ túi", "loa bluetooth chống nước dã ngoại", "sạc dự phòng sạc nhanh", "cáp sạc usb type c bọc dù", "tai nghe chống ồn chủ động", "máy đọc sách kindle loại nào nên mua",
-            // SỨC KHỎE & ĐỜI SỐNG
-            "chế độ ăn kiêng keto là gì", "lợi ích của nhịn ăn gián đoạn", "cách giảm mỡ bụng tại nhà", "bài tập yoga cho người đau lưng", "bài tập cardio đốt mỡ nhanh", "chế độ ăn eat clean lành mạnh", "uống nước đúng cách mỗi ngày", "ngủ bao nhiêu tiếng là đủ", "cách trị mất ngủ ban đêm", "bổ sung vitamin d thế nào", "tác hại của thiếu ngủ kéo dài", "cách giảm căng thẳng trong 5 phút", "bài tập thiền định cho người mới", "chăm sóc da mụn đúng cách", "kem chống nắng quang phổ rộng", "cách trị rụng tóc hiệu quả", "uống trà xanh có tác dụng gì", "tác dụng của mật ong ấm", "nước ép cần tây giảm cân", "các loại hạt tốt cho tim mạch", "dấu hiệu thiếu canxi ở người lớn", "triệu chứng đau dạ dày", "cách hạ huyết áp nhanh tại nhà", "giải độc gan bằng thảo dược", "bài tập thể dục cho dân văn phòng", "tư thế ngồi máy tính đúng cách", "cách phòng ngừa cận thị", "khám sức khỏe định kỳ gồm những gì", "tác hại của thuốc lá điện tử", "cách bỏ thói quen thức khuya", "uống cà phê buổi sáng tốt không", "tập gym thế nào để tăng cơ", "thực phẩm giàu protein nhất", "chất béo bão hòa có hại thế nào", "uống nước dừa có tác dụng gì", "cách trị cảm cúm nhanh tại nhà", "bấm huyệt chữa đau đầu", "tác dụng của việc đi bộ mỗi ngày", "chạy bộ buổi sáng giảm cân", "mẹo ngủ ngon khi đi du lịch", "cách chăm sóc răng miệng đúng cách", "tẩy tế bào chết vật lý và hóa học", "kem dưỡng ẩm cho da dầu mụn", "tác dụng của việc tắm nước lạnh", "massage mặt giảm nếp nhăn", "bảo vệ sức khỏe mùa nắng nóng", "giữ ấm cổ họng mùa lạnh", "triệu chứng trầm cảm nhẹ", "cách duy trì năng lượng tích cực", "tự khám sức khỏe tổng quát tại nhà",
-            // ẨM THỰC & NẤU ĂN
-            "công thức nấu phở bò gia truyền", "cách làm bún chả hà nội", "bí quyết nấu cơm tấm ngon", "cách muối dưa cải chua giòn", "hướng dẫn làm bánh mì việt nam", "công thức làm trà sữa trân châu", "cách pha cà phê phin ngon", "cách nấu lẩu thái chua cay", "món ăn gia đình dễ nấu nhất", "cách ướp thịt nướng mềm thơm", "làm bánh bông lan bằng nồi cơm điện", "cách chiên khoai tây giòn lâu", "làm sữa chua úp ngược tại nhà", "công thức làm bánh flan mịn", "nấu chè dưỡng nhan hạt chia", "cách kho cá ngừ không tanh", "bí quyết nấu nước lèo trong", "cách làm kim chi cải thảo hàn quốc", "món chay ngon thanh đạm", "nước chấm hải sản thần thánh", "cách làm trứng cuộn hàn quốc", "công thức làm pizza tại nhà", "cách làm spaghetti sốt bò bằm", "nấu súp gà nấm rơm bồi bổ", "làm gà rán kfc giòn rụm", "cách nấu bò kho bánh mì", "mẹo vặt nhà bếp cực hay", "bảo quản rau củ tươi lâu trong tủ lạnh", "khử mùi hôi tủ lạnh nhanh nhất", "cách chọn bơ sáp ngon dẻo", "phân biệt cua thịt và cua gạch", "mẹo luộc trứng lòng đào chuẩn", "cách làm nước sốt dầu giấm", "làm sinh tố bơ thơm béo", "cách pha trà đào cam sả", "công thức làm bánh tráng trộn", "cách rán đậu hũ giòn xốp", "nấu canh chua cá lóc miền tây", "món ngon từ thịt ba chỉ", "cách kho thịt kho tàu miền nam", "mẹo làm sạch ốc nhanh nhất", "cách chế biến tổ yến sào", "làm hạt nêm từ tôm tại nhà", "cách ngâm rượu tỏi chữa bệnh", "làm salad ức gà giảm cân", "nấu cháo sườn heo cho bé", "bí quyết làm bánh cuốn nóng", "cách xào thịt bò không bị dai", "mẹo rang cơm hạt cơm săn chắc", "cách nấu chè bưởi không bị đắng",
-            // DU LỊCH & KHÁM PHÁ
-            "kinh nghiệm du lịch sapa tự túc", "địa điểm check in đà lạt", "tour du lịch vịnh hạ long giá rẻ", "khám phá phố cổ hội an", "món ngon phải thử khi đến huế", "du lịch đảo phú quốc mùa nào đẹp", "địa điểm phượt tây bắc bằng xe máy", "review homestay đẹp ninh bình", "hướng dẫn đi cáp treo fansipan", "kinh nghiệm đi du lịch thái lan", "chuẩn bị hành lý đi nước ngoài", "mẹo săn vé máy bay giá rẻ", "khách sạn gần biển đà nẵng", "vui chơi giải trí bà nà hills", "địa điểm cắm trại gần hà nội", "du lịch bụi cực đông tổ quốc", "khám phá hang sơn đoòng", "kinh nghiệm đi tàu hỏa bắc nam", "món ăn đường phố bangkok", "địa điểm du lịch hàn quốc mùa thu", "thủ tục xin visa du lịch nhật bản", "khám phá tháp eiffel pháp", "du lịch đảo bali indonesia", "cảnh đẹp sông nước miền tây", "khám phá đảo cô tô quảng ninh", "địa điểm ngắm hoàng hôn phú quốc", "kinh nghiệm du lịch nha trang 3 ngày 2 đêm", "bản đồ du lịch sài gòn", "phố đi bộ nguyễn huệ có gì chơi", "khám phá động phong nha kẻ bàng", "leo núi nhân tạo ở tphcm", "kinh nghiệm trekking tà năng phan dũng", "đồ dùng cần thiết khi đi cắm trại", "cách xử lý khi bị lạc trong rừng", "địa điểm ngắm hoa tam giác mạch", "du lịch mộc châu mùa hoa cải", "đồi chè trái tim mộc châu", "chợ nổi cái răng cần thơ", "khám phá mũi né phan thiết", "địa điểm du lịch gia đình cuối tuần", "khách sạn resort 5 sao đà nẵng", "kinh nghiệm du lịch singapore tự túc", "khám phá đền angkor wat cambodia", "ẩm thực đường phố đài loan", "địa điểm săn mây đà lạt siêu đẹp", "du lịch hà giang mùa nào đẹp nhất", "cột cờ lũng cú hà giang", "khám phá phố cổ hà nội bằng xích lô", "địa điểm du lịch tâm linh nổi tiếng", "kinh nghiệm đi tàu lượn siêu tốc",
-            // HỌC TẬP & GIÁO DỤC
-            "phương pháp học tiếng anh du kích", "lộ trình ôn thi ielts từ con số 0", "cách nhớ từ vựng tiếng anh siêu nhanh", "ngữ pháp tiếng anh cơ bản nhất", "luyện nghe tiếng anh qua bài hát", "app học ngoại ngữ miễn phí tốt nhất", "bí quyết ôn thi đại học điểm cao", "cách tập trung học bài không buồn ngủ", "kỹ năng thuyết trình trước đám đông", "cách viết sơ yếu lý lịch cv ấn tượng", "mẹo trả lời phỏng vấn xin việc", "kỹ năng quản lý thời gian pomodoro", "phương pháp ghi nhớ mindmap", "đọc sách nhanh và nhớ lâu", "học tiếng trung cho người mới bắt đầu", "bảng chữ cái tiếng nhật hiragana", "cách viết bài luận tiếng anh hay", "từ vựng ielts chủ đề education", "cách làm toán trắc nghiệm nhanh", "bài tập vật lý đại cương có lời giải", "tóm tắt kiến thức lịch sử 12", "các tác phẩm văn học thi thpt quốc gia", "kỹ năng giải quyết vấn đề hiệu quả", "phương pháp tự học hiệu quả tại nhà", "cách cải thiện trí nhớ ngắn hạn", "khóa học lập trình online miễn phí", "học thiết kế đồ họa bắt đầu từ đâu", "kỹ năng giao tiếp trong công việc", "cách làm việc nhóm hiệu quả", "tìm học bổng du học toàn phần", "viết thư xin học bổng bằng tiếng anh", "kinh nghiệm đi du học thạc sĩ", "cách đọc bảng tuần hoàn hóa học", "phương pháp học sơ đồ tư duy", "cách rèn luyện tư duy phản biện", "kỹ năng đàm phán thương lượng", "học phát âm tiếng anh chuẩn ipa", "các thì trong tiếng anh tóm tắt", "mẹo ghi nhớ công thức lượng giác", "bài tập ngữ pháp tiếng anh có đáp án", "tự học lập trình web cơ bản", "kinh nghiệm học thi toeic đạt 800", "cách làm giảm áp lực học tập", "sách phát triển bản thân nên đọc", "kỹ năng lắng nghe thấu cảm", "cách viết email gửi sếp chuyên nghiệp", "cách đặt mục tiêu theo mô hình smart", "phương pháp học tập chủ động", "hướng dẫn sử dụng thư viện trường", "cách đọc hiểu biểu đồ tài chính",
-            // TÀI CHÍNH & KINH DOANH
-            "cách lập kế hoạch tài chính cá nhân", "bí quyết tiết kiệm tiền hiệu quả", "đầu tư chứng khoán cho người mới", "phân biệt cổ phiếu và trái phiếu", "quỹ mở là gì có nên đầu tư", "cách quản lý chi tiêu gia đình", "bí quyết tự do tài chính tuổi 30", "xu hướng kinh doanh online 2026", "cách mở cửa hàng tạp hóa nhỏ", "ý tưởng khởi nghiệp vốn ít lời nhiều", "cách viết kế hoạch kinh doanh mẫu", "tìm nguồn hàng sỉ giá rẻ ở đâu", "cách bán hàng trên shopee từ a đến z", "tối ưu hóa gian hàng lazada", "chạy quảng cáo tiktok shop hiệu quả", "marketing 0 đồng cho doanh nghiệp nhỏ", "cách xây dựng thương hiệu cá nhân", "nguyên tắc đầu tư bất động sản an toàn", "cách xem bảng giá chứng khoán", "phân tích kỹ thuật trong giao dịch coin", "quản trị rủi ro tài chính là gì", "cách tính lãi suất kép ngân hàng", "gửi tiết kiệm ngân hàng nào lãi cao", "kinh doanh nhượng quyền thương hiệu", "phân tích mô hình swot doanh nghiệp", "chiến lược marketing mix 4p", "cách giữ chân khách hàng trung thành", "bí quyết thuyết phục khách hàng khó tính", "kỹ năng quản lý nhân sự hiệu quả", "cách tính lương và bảo hiểm xã hội", "thuế thu nhập cá nhân tính thế nào", "cách đăng ký hộ kinh doanh cá thể", "mở công ty tnhh cần thủ tục gì", "cách quản lý kho hàng không thất thoát", "phần mềm quản lý bán hàng tốt nhất", "thiết lập ngân sách quảng cáo tối ưu", "cách phân tích báo cáo tài chính", "chỉ số roe và roa là gì", "phương pháp đầu tư giá trị", "cách mua vàng tích trữ an toàn", "kinh doanh gì ở nông thôn dễ giàu", "xu hướng tiêu dùng của thế hệ gen z", "cách tạo nguồn thu nhập thụ động", "đầu tư quỹ etf tại việt nam", "cách định giá sản phẩm dịch vụ", "bí quyết thương lượng giá với nhà cung cấp", "phương pháp quản lý tài chính 6 chiếc lọ", "đọc hiểu chỉ số cpi và lạm phát", "tác động của việc tăng lãi suất", "cách tránh bẫy tín dụng đen",
-            // GIẢI TRÍ & PHIM ẢNH
-            "phim điện ảnh bom tấn hay nhất năm", "top phim truyền hình netflix đáng xem", "review phim rạp mới nhất tuần này", "danh sách phim hoạt hình oscar", "phim tâm lý tình cảm hàn quốc hay", "phim hành động võ thuật kịch tính", "phim khoa học viễn tưởng hay nhất mọi thời đại", "nhạc trẻ mới phát hành bảng xếp hạng", "ca khúc lofi chill học tập làm việc", "album nhạc phim nổi tiếng nhất", "nhạc không lời giúp tập trung cao độ", "bài hát karaoke tone nam dễ hát", "bài hát karaoke tone nữ hot nhất", "ca sĩ có giọng hát live đỉnh nhất", "liveshow âm nhạc hoành tráng", "tải game offline pc nhẹ mà hay", "top game sinh tồn đồ họa đẹp", "game mobile chơi cùng bạn bè vui nhất", "hướng dẫn chơi liên minh huyền thoại", "mẹo leo rank liên quân mobile nhanh", "cốt truyện game kinh dị nổi tiếng", "review máy chơi game ps5", "nintendo switch có đáng mua không", "phần cứng pc chơi game cyberpunk 2077", "sự kiện esport lớn nhất năm", "giải đấu liên minh huyền thoại thế giới", "streamer nổi tiếng nhất việt nam", "kênh podcast hay về cuộc sống", "nghe truyện ma nguyễn ngọc ngạn", "sách nói hạt giống tâm hồn", "các trò chơi board game hay nhất", "cách chơi cờ vua thắng nhanh", "bí quyết giải rubik 3x3 dưới 1 phút", "địa điểm xem phim rạp giường nằm", "rạp chiếu phim imax ở đâu tphcm", "lễ hội âm nhạc mùa hè ngoài trời", "trò chơi teambuilding vui nhộn", "cách làm ảo thuật bài đơn giản", "review truyện tranh manga hot nhất", "dự báo cốt truyện anime phần tiếp theo", "đọc truyện chữ ngôn tình hoàn", "nhạc rock việt nổi tiếng một thời", "cách chọn nhạc cụ cho người mới học", "tự học đàn guitar cơ bản tại nhà", "học thổi sáo trúc cơ bản", "học đánh đàn piano bài đơn giản", "đồ chơi lego sáng tạo cho người lớn", "game trí tuệ giải đố hại não", "phim tài liệu lịch sử thế giới", "các chương trình truyền hình thực tế hài hước",
-            // NGHỆ THUẬT & THIẾT KẾ
-            "phần mềm thiết kế đồ họa tốt nhất", "học vẽ phác thảo chân dung cơ bản", "cách phối màu sắc trong thiết kế", "bố cục nhiếp ảnh phong cảnh đẹp", "cách chỉnh ảnh bằng lightroom mobile", "app chỉnh ảnh đẹp miễn phí trên điện thoại", "hướng dẫn chụp ảnh chân dung bằng điện thoại", "thiết kế logo thương hiệu chuyên nghiệp", "font chữ việt hóa đẹp miễn phí", "cách làm video tiktok sáng tạo", "kỹ thuật quay dựng phim cơ bản", "phần mềm làm phim hoạt hình 2d", "cách vẽ tranh phong cảnh màu nước", "nghệ thuật gấp giấy origami nhật bản", "trang trí phòng ngủ đơn giản đẹp", "thiết kế nội thất căn hộ nhỏ", "phong cách thiết kế minimalism", "cách chọn rèm cửa hợp phong thủy", "nghệ thuật cắm hoa bàn tiệc", "học làm đồ handmade từ giấy vụn", "cách vẽ nail đơn giản tại nhà", "phối đồ vintage cho nam cổ điển", "phối đồ nữ cá tính năng động", "xu hướng thời trang streetwear", "cách chọn size quần áo chuẩn", "vẽ tranh tường phòng khách", "học viết chữ đẹp calligraphy", "kỹ thuật thêu tay cơ bản", "cách làm nến thơm handmade", "làm xà phòng thảo dược tại nhà", "cách làm gốm thủ công nghệ thuật", "kiến trúc độc đáo trên thế giới", "các danh họa nổi tiếng lịch sử", "bức tranh mona lisa có gì đặc biệt", "nghệ thuật điêu khắc đá cẩm thạch", "thiết kế giao diện ui ux website", "nguyên lý thị giác trong thiết kế", "cách chọn tranh treo tường hợp tuổi", "trang trí sân vườn biệt thự đẹp", "thiết kế ban công chung cư xanh mát", "cách làm thiệp nổi 3d độc đáo", "chụp ảnh flatlay sản phẩm bắt mắt", "kỹ thuật phơi sáng đêm nhiếp ảnh", "cách làm photobook kỷ niệm gia đình", "vẽ tranh chibi bằng photoshop", "thiết kế thiệp cưới online miễn phí", "phông nền chụp ảnh sản phẩm đẹp", "xu hướng màu sắc chủ đạo năm nay", "phong cách thiết kế scandinavian", "cách đan len khăn choàng mùa đông",
-            // THÚ CƯNG & KIẾN THỨC CHUNG
-            "cách chăm sóc mèo con mới đẻ", "huấn luyện chó đi vệ sinh đúng chỗ", "thức ăn hạt cho chó tốt nhất", "các giống mèo cảnh phổ biến nhất", "cách nuôi rùa cảnh trong nhà", "chăm sóc cá vàng không bị chết", "cây cảnh phong thủy trồng trong nhà", "cách trồng rau sạch trên sân thượng", "cây kim tiền hợp tuổi nào", "cây lưỡi hổ có tác dụng gì", "cách diệt kiến tận gốc tại nhà", "mẹo đuổi muỗi bằng nguyên liệu tự nhiên", "cách tẩy vết ố vàng trên áo trắng", "khử mùi hôi giày nhanh hiệu quả", "mẹo thông cống nghẹt bằng baking soda", "cách lau kính sạch bóng không tì vết", "vệ sinh máy giặt cửa ngang tại nhà", "cách bảo quản đồ da không bị mốc", "mẹo gấp quần áo siêu nhanh gọn", "cách chọn mua nệm ngủ êm ái", "phong thủy phòng ngủ hút tài lộc", "hướng nhà hợp tuổi gia chủ", "cách xem ngày lành tháng tốt", "ý nghĩa của các giấc mơ phổ biến", "cách giải xui xẻo đeo bám", "mẹo ứng xử thông minh nơi công sở", "cách duy trì tình bạn lâu năm", "món quà tặng sinh nhật ý nghĩa nhất", "cách tổ chức tiệc cưới tiết kiệm", "chuẩn bị mâm cỗ cúng gia tiên", "văn khấn ngày rằm mùng một", "tử vi 12 con giáp năm nay", "bói bài tarot dự báo tương lai", "cung hoàng đạo nào hợp nhau nhất", "cách làm sạch trang sức bạc bị đen", "mẹo đi chợ tiết kiệm chi tiêu", "cách chọn dưa hấu ngọt nhiều nước", "phân biệt mật ong rừng nguyên chất", "cách tự sửa vòi nước bị rò rỉ", "thay bóng đèn led tại nhà an toàn", "cách đấu dây điện ổ cắm công tắc", "dụng cụ sửa chữa đa năng nên có", "bảo dưỡng xe máy định kỳ gồm gì", "cách kiểm tra dầu nhớt xe máy ô tô", "mẹo lái xe an toàn trời mưa ngập nước", "cách sơ cứu khi bị bỏng nhẹ", "xử lý vết thương khi bị ong đốt", "cách hạ sốt nhanh cho trẻ nhỏ", "phương pháp dạy con tự lập sớm", "cách quản lý thời gian xem tivi của trẻ"
+            "khám phá hố đen vũ trụ", "giá bitcoin hôm nay", "cách làm bánh flan mềm mịn", "địa điểm du lịch đà lạt 2026", "review điện thoại iphone 17",
+            "cách học tiếng anh giao tiếp", "bài tập giảm mỡ bụng", "tình hình kinh tế thế giới", "phim bom tấn chiếu rạp", "trang trí phòng ngủ vintage",
+            "thuyết tương đối của einstein", "lịch sử triều đại nhà nguyễn", "cách trồng cây sen đá", "mẹo tiết kiệm tiền", "review sách nhà giả kim",
+            "cách sửa lỗi máy tính màn hình xanh", "nhạc lofi không lời chill", "dự báo thời tiết ngày mai", "công nghệ trí tuệ nhân tạo ai", "cách làm marketing online",
+            "kiến thức đầu tư chứng khoán", "nguyên lý hoạt động động cơ điện", "kỹ năng mềm cho sinh viên", "review xe ô tô điện vinfast", "địa điểm phượt tây bắc",
+            "cách nấu bún bò huế", "phân biệt chó husky và alaska", "cấu hình pc gaming 15 triệu", "cách chọn nước hoa nam", "tử vi cung thiên bình",
+            "các loại vitamin tốt cho da", "kỹ thuật chụp ảnh chân dung", "app quản lý chi tiêu", "cách làm cv xin việc ấn tượng", "xu hướng thời trang gen z",
+            "mẹo chơi cờ vua thắng", "cách làm sữa chua tại nhà", "du lịch sapa mùa đông", "công cụ lập trình python", "giải vô địch bóng đá thế giới",
+            "tìm hiểu về Metaverse", "kính viễn vọng James Webb", "cách làm thiệp handmade", "máy lọc không khí loại nào tốt", "cách bảo mật wifi",
+            "triệu chứng thiếu hụt canxi", "cách trồng rau sạch ban công", "mẹo làm sạch giày trắng", "review phim hoạt hình ghibli", "lợi ích của việc đọc sách",
+            "lịch sử phát minh ra internet", "kiến trúc nhà cấp 4 đẹp", "mẹo học thuộc bài nhanh", "bí quyết sống lâu của người nhật", "cách nấu chè dưỡng nhan",
+            "nguyên nhân gây rụng tóc", "cách nuôi cá cảnh trong nhà", "review tai nghe bluetooth ngon", "mẹo ngủ ngon sâu giấc", "cách viết hóa đơn điện tử",
+            "tìm hiểu triết học khắc kỷ", "tỷ giá usd hôm nay", "món ngon từ ức gà", "bí quyết chụp ảnh flatlay", "cách bảo dưỡng xe máy định kỳ",
+            "tác dụng của trà xanh", "cách dọn dẹp nhà tối giản", "mẹo trị ho bằng dân gian", "hướng dẫn tạo kênh youtube", "cách chọn size quần áo online",
+            "lịch thi đấu cúp c1 hôm nay", "phim khoa học viễn tưởng hay nhất", "các bước chăm sóc da mụn", "mẹo tẩy vết ố trên áo", "cách làm salad giảm cân",
+            "học phí đại học ngoại thương", "review bàn phím cơ giá rẻ", "tại sao bầu trời có màu xanh", "cách thắt cà vạt đơn giản", "lợi ích của nước dừa",
+            "mẹo chữa bỏng nhẹ tại nhà", "cách lập kế hoạch tài chính cá nhân", "tải hình nền máy tính 4k", "tìm hiểu phong thủy phòng khách", "cách tập squat đúng tư thế",
+            "review robot hút bụi thông minh", "các món lẩu ngon dễ làm", "mẹo khử mùi tủ lạnh", "lợi ích của thiền định", "cách pha cà phê phin đậm đà"
         ];
 
-        let keywords = JSON.parse(localStorage.getItem('bing_auto_keywords')) || [...defaultKeywords];
-        let isRunning = false;
-        let isSafeMode = false;
-        let countdownValue = 15;
-        let searchInterval = 15; 
-        let timerId = null;
+        let keywords = JSON.parse(localStorage.getItem('bing_auto_keywords_v3')) || [...defaultKeywords];
 
         // DOM Elements
-        const btnToggle = document.getElementById('btn-toggle');
-        const btnTrigger = document.getElementById('btn-trigger');
-        const inputInterval = document.getElementById('input-interval');
-        const countdownText = document.getElementById('countdown-text');
-        const progressBar = document.getElementById('progress-bar');
         const keywordContainer = document.getElementById('keyword-container');
         const inputNewKeyword = document.getElementById('input-new-keyword');
         const btnAdd = document.getElementById('btn-add');
         const keywordCount = document.getElementById('keyword-count');
         const searchLog = document.getElementById('search-log');
         const btnResetKeywords = document.getElementById('btn-reset-keywords');
-        const btnSafeMode = document.getElementById('btn-rewards-bypass');
-        const statusBadge = document.getElementById('status-badge');
-        const statusText = document.getElementById('status-text');
-        const intervalTip = document.getElementById('interval-tip');
+        const toast = document.getElementById('toast');
 
-        // Elements các tab chuyển giao diện
+        // Tabs & Panels
+        const tabSuperBtn = document.getElementById('tab-super-btn');
         const tabAutoBtn = document.getElementById('tab-auto-btn');
-        const tabManualBtn = document.getElementById('tab-manual-btn');
+        const panelSuper = document.getElementById('panel-super');
         const panelAuto = document.getElementById('panel-auto');
-        const panelManual = document.getElementById('panel-manual');
-        const manualLinksContainer = document.getElementById('manual-links-container');
-        const btnRefreshManual = document.getElementById('btn-refresh-manual');
+        const superLinksContainer = document.getElementById('super-links-container');
+        const btnRefreshSuper = document.getElementById('btn-refresh-super');
 
-        // Hàm render kho từ khóa
+        // Auto Search Controls
+        const btnToggleAuto = document.getElementById('btn-toggle-auto');
+        const btnTriggerSingle = document.getElementById('btn-trigger-single');
+        const selectInterval = document.getElementById('select-interval');
+        const inputLimit = document.getElementById('input-limit');
+        const countdownText = document.getElementById('countdown-text');
+        const progressBar = document.getElementById('progress-bar');
+
+        let isAutoRunning = false;
+        let countdownValue = 15;
+        let currentInterval = 15;
+        let autoTimer = null;
+        let searchCount = 0;
+        let childWindow = null; // Biến giữ tham chiếu đến 1 Tab duy nhất
+
+        // Render Tags
         function renderKeywords() {
             keywordContainer.innerHTML = '';
             keywordCount.innerText = `${keywords.length} từ khóa`;
-            
-            if (keywords.length === 0) {
-                keywordContainer.innerHTML = `<p class="text-slate-500 text-xs italic p-2 w-full text-center">Không có từ khóa. Hãy thêm mới!</p>`;
-                return;
-            }
-
+            if (keywords.length === 0) return;
             keywords.forEach((kw, index) => {
                 const tag = document.createElement('div');
-                tag.className = 'bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 border border-slate-700/60 transition-all';
-                tag.innerHTML = `
-                    <span class="select-none">${kw}</span>
-                    <button class="text-slate-500 hover:text-red-400 font-bold ml-1 text-sm focus:outline-none" onclick="deleteKeyword(${index})">×</button>
-                `;
+                tag.className = 'bg-slate-850 hover:bg-slate-800 text-slate-300 text-[11px] px-2 py-1 rounded-md flex items-center gap-1.5 border border-slate-700/60 transition-colors';
+                tag.innerHTML = `<span>${kw}</span><button class="text-slate-500 hover:text-red-400 font-bold text-sm focus:outline-none" onclick="deleteKeyword(${index})">×</button>`;
                 keywordContainer.appendChild(tag);
             });
-            
-            localStorage.setItem('bing_auto_keywords', JSON.stringify(keywords));
+            localStorage.setItem('bing_auto_keywords_v3', JSON.stringify(keywords));
         }
 
         window.deleteKeyword = function(index) {
             keywords.splice(index, 1);
             renderKeywords();
-            if (panelManual.classList.contains('flex')) {
-                generateManualLinks();
-            }
+            generateSuperPanels();
         };
 
-        function addKeyword() {
+        btnAdd.addEventListener('click', () => {
             const val = inputNewKeyword.value.trim();
             if (val && !keywords.includes(val)) {
                 keywords.push(val);
                 renderKeywords();
                 inputNewKeyword.value = '';
-                if (panelManual.classList.contains('flex')) {
-                    generateManualLinks();
-                }
+                generateSuperPanels();
             }
-        }
+        });
 
-        btnAdd.addEventListener('click', addKeyword);
         inputNewKeyword.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') addKeyword();
+            if (e.key === 'Enter') {
+                btnAdd.click();
+            }
         });
 
         btnResetKeywords.addEventListener('click', () => {
-            if (confirm("Khôi phục lại danh sách 500 từ khóa mẫu gốc?")) {
+            if (confirm("Nạp lại danh sách từ khóa mặc định?")) {
                 keywords = [...defaultKeywords];
                 renderKeywords();
-                if (panelManual.classList.contains('flex')) {
-                    generateManualLinks();
-                }
+                generateSuperPanels();
             }
         });
 
-        // Ghi nhật ký tìm kiếm
-        function logSearch(keyword, method = "Auto") {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('vi-VN', { hour12: false });
-            
+        function logActivity(message, type) {
+            const timeString = new Date().toLocaleTimeString('vi-VN', { hour12: false });
             const logEntry = document.createElement('div');
-            logEntry.className = 'py-1.5 border-b border-slate-900/50 last:border-b-0 flex justify-between items-center gap-4';
-            logEntry.innerHTML = `
-                <span class="text-slate-500 shrink-0">[${timeString}]</span>
-                <span class="text-slate-300 text-[11px] font-mono bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">${method}</span>
-                <span class="text-blue-400 font-semibold flex-grow truncate text-right">"${keyword}"</span>
-            `;
-            
-            if (searchLog.querySelector('.italic')) {
-                searchLog.innerHTML = '';
+            logEntry.className = 'py-1.5 border-b border-slate-900/50 flex items-center justify-between gap-3';
+            let badge = '';
+            if (type === 'copy') {
+                badge = '<span class="text-[9px] bg-violet-900/60 text-violet-300 border border-violet-500/30 px-1.5 py-0.5 rounded">COPY</span>';
+            } else {
+                badge = '<span class="text-[9px] bg-blue-900/60 text-blue-300 border border-blue-500/30 px-1.5 py-0.5 rounded">AUTO</span>';
             }
+            logEntry.innerHTML = `<div class="flex items-center gap-2"><span class="text-slate-500 shrink-0">[${timeString}]</span>${badge}</div><span class="text-slate-300 font-semibold truncate">"${message}"</span>`;
+            if (searchLog.querySelector('.italic')) searchLog.innerHTML = '';
             searchLog.insertBefore(logEntry, searchLog.firstChild);
         }
 
-        // BIỆN PHÁP SỬA LỖI ĐỂ TÍNH ĐIỂM:
-        // Sử dụng thuộc tính 'noopener,noreferrer' để trình duyệt KHÔNG gửi Referer URL về Bing, giúp qua mặt bộ lọc bot.
-        function performSecureSearch(keyword, method = "Auto") {
-            if (!keyword) return;
-            logSearch(keyword, method);
-            const encoded = encodeURIComponent(keyword);
-            const searchUrl = `https://www.bing.com/search?q=${encoded}`;
-            
-            // Fix cốt lõi: Ngăn chặn truyền Referer và ngăn liên kết ngược window.opener
-            window.open(searchUrl, '_blank', 'noopener,noreferrer');
+        function showToast() {
+            toast.classList.remove('hidden');
+            toast.classList.add('flex', 'toast-enter');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex', 'toast-enter');
+            }, 3000);
         }
 
-        function triggerAutoSearch() {
-            if (keywords.length === 0) {
-                alert("Danh sách từ khóa đang trống!");
-                stopTimer();
+        // ================= THUẬT TOÁN TẠO DẤU VẾT GIẢ LẬP BING REWARD =================
+        function generateCVID() {
+            return [...Array(32)].map(() => Math.floor(Math.random() * 16).toString(16).toUpperCase()).join('');
+        }
+
+        function getRandomForm() {
+            const forms = ['QBLH', 'QBRE', 'QSRE', 'WSBSRC', 'U523', 'ASPR'];
+            return forms[Math.floor(Math.random() * forms.length)];
+        }
+
+        function getOrganicURL(keyword) {
+            const cvid = generateCVID();
+            const form = getRandomForm();
+            const fakeSp = Math.floor(Math.random() * 5) + 1;
+            // spoof toàn bộ các tham số tracking của trình duyệt Edge thật
+            return `https://www.bing.com/search?q=${encodeURIComponent(keyword)}&form=${form}&cvid=${cvid}&sp=${fakeSp}&qs=n&pq=${encodeURIComponent(keyword)}&sc=10-0&sk=`;
+        }
+
+        function getRandomKeyword() {
+            if (keywords.length === 0) return "bing rewards";
+            return keywords[Math.floor(Math.random() * keywords.length)];
+        }
+
+        // ================= CHẠY TỰ ĐỘNG (SINGLE-TAB ENGINE) =================
+        function executeAutoSearch() {
+            const limit = parseInt(inputLimit.value) || 30;
+            if (searchCount >= limit) {
+                logActivity("Đã hoàn thành số lượng giới hạn tìm kiếm!", "auto");
+                stopAutoSearch();
                 return;
             }
-            const randomIndex = Math.floor(Math.random() * keywords.length);
-            performSecureSearch(keywords[randomIndex], "Auto ⚙️");
+
+            const keyword = getRandomKeyword();
+            const url = getOrganicURL(keyword);
+
+            // BÍ QUYẾT TRÙM: Tái sử dụng cùng một tab có tên "bing_search_session"
+            // Cách này mô phỏng người dùng gõ tìm kiếm tiếp tục trên tab đó, không sinh ra hàng chục tab rác
+            if (!childWindow || childWindow.closed) {
+                childWindow = window.open(url, 'bing_search_session', 'noopener=false,noreferrer=false');
+            } else {
+                childWindow.location.href = url;
+            }
+
+            searchCount++;
+            logActivity(`${searchCount}/${limit} - ${keyword}`, "auto");
         }
 
-        // Hoạt họa thanh tiến trình
         function updateProgress() {
-            const maxOffset = 440; 
-            const percent = countdownValue / searchInterval;
+            const maxOffset = 390; // Chu vi của vòng tròn r=62
+            const percent = countdownValue / currentInterval;
             const offset = maxOffset - (percent * maxOffset);
             progressBar.style.strokeDashoffset = offset;
         }
 
+        function getNextInterval() {
+            const val = selectInterval.value;
+            if (val === 'random') {
+                return Math.floor(Math.random() * (45 - 15 + 1)) + 15; // Ngẫu nhiên 15s đến 45s
+            }
+            return parseInt(val) || 15;
+        }
+
         function tick() {
             countdownValue--;
-            
-            if (countdownValue >= 60) {
-                const mins = Math.floor(countdownValue / 60);
-                const secs = countdownValue % 60;
-                countdownText.innerText = `${mins}m ${secs}s`;
-            } else {
-                countdownText.innerText = `${countdownValue}s`;
-            }
-            
+            countdownText.innerText = `${countdownValue}s`;
             updateProgress();
 
             if (countdownValue <= 0) {
-                triggerAutoSearch();
-                countdownValue = searchInterval;
+                executeAutoSearch();
+                currentInterval = getNextInterval();
+                countdownValue = currentInterval;
                 updateProgress();
             }
         }
 
-        function startTimer() {
-            isRunning = true;
-            btnToggle.innerHTML = `<i data-lucide="pause" class="w-5 h-5"></i><span>Tạm dừng</span>`;
-            btnToggle.classList.replace('bg-blue-600', 'bg-amber-600');
-            btnToggle.classList.replace('hover:bg-blue-500', 'hover:bg-amber-500');
+        function startAutoSearch() {
+            isAutoRunning = true;
+            btnToggleAuto.innerHTML = `<i data-lucide="pause-circle" class="w-5 h-5"></i><span>Tạm Dừng Auto</span>`;
+            btnToggleAuto.classList.remove('bg-blue-600', 'hover:bg-blue-500');
+            btnToggleAuto.classList.add('bg-amber-600', 'hover:bg-amber-500');
             
-            searchInterval = parseInt(inputInterval.value) || 15;
-            countdownValue = searchInterval;
-            
-            if (countdownValue >= 60) {
-                const mins = Math.floor(countdownValue / 60);
-                const secs = countdownValue % 60;
-                countdownText.innerText = `${mins}m ${secs}s`;
-            } else {
-                countdownText.innerText = `${countdownValue}s`;
-            }
+            currentInterval = getNextInterval();
+            countdownValue = currentInterval;
+            countdownText.innerText = `${countdownValue}s`;
+            document.querySelector('#panel-auto span[id="countdown-text"] + span').innerText = "Tiếp theo";
             updateProgress();
             
-            inputInterval.disabled = true;
-            btnSafeMode.disabled = true;
+            // Khóa cấu hình khi đang chạy
+            selectInterval.disabled = true;
+            inputLimit.disabled = true;
 
-            timerId = setInterval(tick, 1000);
-            
-            statusBadge.classList.replace('bg-slate-800', 'bg-blue-950');
-            statusBadge.classList.replace('text-slate-300', 'text-blue-300');
-            statusText.innerText = "Đang chạy tự động...";
+            autoTimer = setInterval(tick, 1000);
             lucide.createIcons();
         }
 
-        function stopTimer() {
-            isRunning = false;
-            btnToggle.innerHTML = `<i data-lucide="play" class="w-5 h-5"></i><span>Bắt đầu tự động</span>`;
-            btnToggle.classList.replace('bg-amber-600', 'bg-blue-600');
-            btnToggle.classList.replace('hover:bg-amber-500', 'hover:bg-blue-500');
+        function stopAutoSearch() {
+            isAutoRunning = false;
+            btnToggleAuto.innerHTML = `<i data-lucide="play-circle" class="w-5 h-5"></i><span>Bắt Đầu Auto</span>`;
+            btnToggleAuto.classList.remove('bg-amber-600', 'hover:bg-amber-500');
+            btnToggleAuto.classList.add('bg-blue-600', 'hover:bg-blue-500');
             
-            inputInterval.disabled = false;
-            btnSafeMode.disabled = false;
-            
-            if (timerId) clearInterval(timerId);
-            
-            statusBadge.classList.replace('bg-blue-950', 'bg-slate-800');
-            statusBadge.classList.replace('text-blue-300', 'text-slate-300');
-            statusText.innerText = "Đang tạm dừng";
+            countdownText.innerText = "15s";
+            document.querySelector('#panel-auto span[id="countdown-text"] + span').innerText = "Đang dừng";
+            progressBar.style.strokeDashoffset = 0;
+
+            selectInterval.disabled = false;
+            inputLimit.disabled = false;
+
+            if (autoTimer) clearInterval(autoTimer);
             lucide.createIcons();
         }
 
-        // Kích hoạt Safe Cooldown (Chống chặn từ Microsoft: 300 giây = 5 phút giữa mỗi lượt tìm kiếm)
-        btnSafeMode.addEventListener('click', () => {
-            isSafeMode = !isSafeMode;
-            if (isSafeMode) {
-                btnSafeMode.innerText = "Chống Block: BẬT";
-                btnSafeMode.classList.replace('bg-red-950/80', 'bg-emerald-600');
-                btnSafeMode.classList.replace('text-red-400', 'text-white');
-                btnSafeMode.classList.add('border-emerald-400');
-                
-                inputInterval.value = 300; 
-                inputInterval.min = 300;
-                intervalTip.innerText = "An toàn tối thiểu: 300s";
-                
-                searchInterval = 300;
-                countdownValue = 300;
-                countdownText.innerText = "5m 0s";
-                updateProgress();
+        btnToggleAuto.addEventListener('click', () => {
+            if (isAutoRunning) {
+                stopAutoSearch();
             } else {
-                btnSafeMode.innerText = "Chống Block: TẮT";
-                btnSafeMode.classList.replace('bg-emerald-600', 'bg-red-950/80');
-                btnSafeMode.classList.replace('text-white', 'text-red-400');
-                btnSafeMode.classList.remove('border-emerald-400');
-                
-                inputInterval.value = 15;
-                inputInterval.min = 5;
-                intervalTip.innerText = "Tối thiểu đề nghị: 15s";
-                
-                searchInterval = 15;
-                countdownValue = 15;
-                countdownText.innerText = "15s";
+                startAutoSearch();
+            }
+        });
+
+        btnTriggerSingle.addEventListener('click', () => {
+            executeAutoSearch();
+            if (isAutoRunning) {
+                currentInterval = getNextInterval();
+                countdownValue = currentInterval;
                 updateProgress();
             }
         });
 
-        btnToggle.addEventListener('click', () => {
-            if (isRunning) stopTimer(); else startTimer();
-        });
-
-        btnTrigger.addEventListener('click', () => {
-            if (keywords.length > 0) {
-                const randomIndex = Math.floor(Math.random() * keywords.length);
-                performSecureSearch(keywords[randomIndex], "Instant ⚡");
-            }
-            if (isRunning) {
-                countdownValue = searchInterval;
-                updateProgress();
-            }
-        });
-
-        inputInterval.addEventListener('change', () => {
-            let val = parseInt(inputInterval.value);
-            const minAllowed = isSafeMode ? 300 : 5;
-            if (isNaN(val) || val < minAllowed) val = minAllowed;
-            else if (val > 1800) val = 1800;
-            inputInterval.value = val;
-            searchInterval = val;
-            countdownValue = val;
-            
-            if (countdownValue >= 60) {
-                const mins = Math.floor(countdownValue / 60);
-                const secs = countdownValue % 60;
-                countdownText.innerText = `${mins}m ${secs}s`;
-            } else {
-                countdownText.innerText = `${countdownValue}s`;
-            }
-            updateProgress();
-        });
-
-        // TẠO LIÊN KẾT CLICK TAY AN TOÀN TUYỆT ĐỐI (100% CỘNG ĐIỂM):
-        function generateManualLinks() {
-            manualLinksContainer.innerHTML = '';
-            if (keywords.length === 0) {
-                manualLinksContainer.innerHTML = '<p class="text-slate-500 text-xs italic text-center py-4">Hãy thêm từ khóa vào kho từ khóa trước!</p>';
-                return;
-            }
-
-            // Chọn ngẫu nhiên 3 từ khóa không trùng lặp
+        // ================= TẠO PANEL TAB 2 (COPY PASTE VÔ HÌNH) =================
+        function generateSuperPanels() {
+            superLinksContainer.innerHTML = '';
+            let temp = [...keywords];
             let selected = [];
-            let tempKeywords = [...keywords];
             for (let i = 0; i < 3; i++) {
-                if (tempKeywords.length === 0) break;
-                const rIdx = Math.floor(Math.random() * tempKeywords.length);
-                selected.push(tempKeywords.splice(rIdx, 1)[0]);
+                if (temp.length === 0) break;
+                selected.push(temp.splice(Math.floor(Math.random() * temp.length), 1)[0]);
             }
 
             selected.forEach((kw, idx) => {
-                // Sửa thành thẻ <a> thay vì <button> để kích hoạt hành vi click tự nhiên của trình duyệt
-                const link = document.createElement('a');
-                const encoded = encodeURIComponent(kw);
-                link.href = `https://www.bing.com/search?q=${encoded}`;
-                link.target = "_blank";
-                link.rel = "noopener noreferrer";
-                link.className = "block w-full text-left bg-slate-900 border border-slate-800 hover:border-emerald-500/50 p-3.5 rounded-xl flex items-center justify-between gap-3 group transition-all duration-200 active:scale-[0.99] cursor-pointer";
-                link.innerHTML = `
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-slate-900 border border-slate-800 hover:border-violet-500/50 p-3.5 rounded-xl flex items-center justify-between group transition-all duration-200 cursor-pointer";
+                btn.innerHTML = `
                     <div class="flex items-center gap-3 truncate">
-                        <span class="w-6 h-6 rounded-lg bg-slate-800 text-[11px] font-bold text-slate-400 flex items-center justify-center group-hover:bg-emerald-950 group-hover:text-emerald-400 shrink-0">${idx + 1}</span>
-                        <span class="text-xs font-semibold text-slate-300 group-hover:text-emerald-200 truncate font-mono">"${kw}"</span>
+                        <span class="w-6 h-6 rounded-lg bg-slate-800 text-[11px] font-bold text-slate-400 flex items-center justify-center group-hover:bg-violet-600 group-hover:text-white shrink-0">${idx + 1}</span>
+                        <span class="text-xs font-semibold text-slate-300 group-hover:text-violet-300 truncate">"${kw}"</span>
                     </div>
-                    <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-emerald-400 shrink-0 transition-colors"></i>
+                    <i data-lucide="copy" class="w-4 h-4 text-slate-500 group-hover:text-violet-400 shrink-0"></i>
                 `;
-                
-                // Trực tiếp xử lý khi nhấp: Chỉ ghi nhận log và đổi trạng thái giao diện, không can thiệp mở tab bằng code JS nữa
-                link.onclick = () => {
-                    logSearch(kw, "Manual 👆");
-                    link.classList.replace('border-slate-800', 'border-emerald-500/40');
-                    link.classList.add('bg-emerald-950/10');
-                    
-                    const spanEl = link.querySelector('span');
-                    if (spanEl) {
-                        spanEl.classList.replace('bg-slate-800', 'bg-emerald-500');
-                        spanEl.classList.replace('text-slate-400', 'text-white');
-                    }
+                btn.onclick = () => {
+                    navigator.clipboard.writeText(kw).then(() => {
+                        logActivity(kw, 'copy');
+                        showToast();
+                        btn.classList.add('bg-violet-900/20', 'border-violet-500/50');
+                        window.open("https://www.bing.com/", "_blank", "noopener,noreferrer");
+                    });
                 };
-                manualLinksContainer.appendChild(link);
+                superLinksContainer.appendChild(btn);
             });
             lucide.createIcons();
         }
 
-        btnRefreshManual.addEventListener('click', generateManualLinks);
+        btnRefreshSuper.addEventListener('click', generateSuperPanels);
 
-        // Chuyển đổi Tab linh hoạt
+        // ================= CHUYỂN TAB ĐIỀU KHIỂN =================
+        tabSuperBtn.addEventListener('click', () => {
+            tabSuperBtn.className = "flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 bg-violet-600 text-white shadow-lg shadow-violet-900/20";
+            tabAutoBtn.className = "flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200";
+            panelSuper.classList.remove('hidden');
+            panelAuto.classList.add('hidden');
+        });
+
         tabAutoBtn.addEventListener('click', () => {
             tabAutoBtn.className = "flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-900/20";
-            tabManualBtn.className = "flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200";
+            tabSuperBtn.className = "flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200";
+            panelSuper.classList.add('hidden');
             panelAuto.classList.remove('hidden');
-            panelManual.classList.add('hidden');
         });
 
-        tabManualBtn.addEventListener('click', () => {
-            tabManualBtn.className = "flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 bg-emerald-600 text-white shadow-lg shadow-emerald-900/20";
-            tabAutoBtn.className = "flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200";
-            panelAuto.classList.add('hidden');
-            panelManual.classList.remove('hidden');
-            panelManual.classList.add('flex');
-            stopTimer();
-            generateManualLinks();
-        });
-
-        // Khởi tạo ứng dụng
+        // Khởi chạy
         window.addEventListener('DOMContentLoaded', () => {
             renderKeywords();
-            generateManualLinks();
-            progressBar.style.strokeDasharray = 440;
-            progressBar.style.strokeDashoffset = 440;
+            generateSuperPanels();
             lucide.createIcons();
+            progressBar.style.strokeDasharray = 390;
+            progressBar.style.strokeDashoffset = 0;
         });
     </script>
 </body>

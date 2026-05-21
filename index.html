@@ -17,7 +17,6 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between font-sans">
 
-    <!-- Header -->
     <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
@@ -39,7 +38,6 @@
         </div>
     </header>
 
-    <!-- Tab Navigation -->
     <div class="max-w-5xl w-full mx-auto px-4 mt-6">
         <div class="bg-slate-950 p-1.5 rounded-xl border border-slate-800 flex flex-col sm:flex-row gap-2">
             <button id="tab-auto-btn" class="flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-900/20">
@@ -53,20 +51,15 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <main class="max-w-5xl w-full mx-auto px-4 py-6 flex-grow grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        <!-- Cột trái: Bảng Điều Khiển Auto 15s -->
         <div id="panel-auto" class="lg:col-span-1 flex flex-col gap-6">
             <div class="bg-slate-850 border border-slate-800 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
-                
                 <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-2">
                     <i data-lucide="cpu" class="w-4 h-4 text-blue-400"></i> Cấu hình Auto 15s
                 </h2>
                 <p class="text-[11px] text-slate-400 mb-5 leading-relaxed">Sử dụng cơ chế <strong>Single-Tab</strong> của bingreward.com: Chỉ mở và điều hướng trên đúng 1 tab duy nhất để qua mặt bộ quét bot của Microsoft.</p>
-
-                <!-- Vòng tròn đếm ngược -->
                 <div class="relative w-36 h-36 mx-auto my-4 flex items-center justify-center">
                     <svg class="w-full h-full transform -rotate-90">
                         <circle cx="72" cy="72" r="62" class="stroke-slate-800" stroke-width="6" fill="transparent" />
@@ -77,21 +70,16 @@
                         <span class="text-[9px] uppercase text-slate-400 mt-1">Đang dừng</span>
                     </div>
                 </div>
-
-                <!-- Các nút điều khiển -->
                 <div class="flex flex-col gap-3">
                     <button id="btn-toggle-auto" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-900/30 active:scale-[0.98]">
                         <i data-lucide="play-circle" class="w-5 h-5"></i>
                         <span>Bắt Đầu Auto</span>
                     </button>
-                    
                     <button id="btn-trigger-single" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition-all active:scale-[0.98]">
                         <i data-lucide="shuffle" class="w-4 h-4"></i>
                         <span>Tìm Ngẫu Nhiên Ngay</span>
                     </button>
                 </div>
-
-                <!-- Cấu hình giãn cách -->
                 <div class="mt-5 pt-5 border-t border-slate-800 flex flex-col gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Thời gian giãn cách</label>
@@ -118,20 +106,14 @@
             </div>
         </div>
 
-        <!-- Cột trái thay thế: Bảng Copy-Paste Vô Hình -->
         <div id="panel-super" class="lg:col-span-1 hidden flex flex-col gap-6">
             <div class="bg-slate-850 border border-violet-900/50 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-500 to-fuchsia-500"></div>
-                
                 <h2 class="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-2 flex items-center gap-2">
                     <i data-lucide="user-check" class="w-4 h-4 text-violet-400"></i> Sao chép rảnh tay
                 </h2>
                 <p class="text-[11px] text-slate-400 mb-5 leading-relaxed">Hệ thống sẽ <strong>Tự Động Copy</strong> từ khóa và mở trang chủ Bing sạch. Bạn chỉ cần bấm <kbd class="bg-slate-700 px-1.5 py-0.5 rounded text-slate-200 font-mono text-[10px]">Ctrl+V</kbd> và <kbd class="bg-slate-700 px-1.5 py-0.5 rounded text-slate-200 font-mono text-[10px]">Enter</kbd>. An toàn tuyệt đối 100%!</p>
-
-                <div class="flex flex-col gap-3" id="super-links-container">
-                    <!-- Tạo tự động từ JS -->
-                </div>
-
+                <div class="flex flex-col gap-3" id="super-links-container"></div>
                 <button id="btn-refresh-super" class="w-full mt-4 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 border border-slate-700 transition-all">
                     <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
                     Đổi 3 từ khóa mới
@@ -139,9 +121,7 @@
             </div>
         </div>
 
-        <!-- Cột phải: Quản lý & Lịch sử -->
         <div class="lg:col-span-2 flex flex-col gap-6">
-            <!-- Kho từ khóa -->
             <div class="bg-slate-850 border border-slate-800 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl flex flex-col h-[380px]">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                     <div>
@@ -151,18 +131,13 @@
                     </div>
                     <span id="keyword-count" class="self-start bg-slate-800 border border-slate-700 text-slate-300 text-xs px-2.5 py-1 rounded-full font-semibold">0 từ khóa</span>
                 </div>
-
                 <div class="flex gap-2 mb-4">
                     <input type="text" id="input-new-keyword" placeholder="Thêm từ khóa chống trùng lặp..." class="flex-grow bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-blue-500 transition-all text-sm">
                     <button id="btn-add" class="bg-slate-800 hover:bg-slate-700 text-white px-4 rounded-xl border border-slate-700 flex items-center justify-center transition-all">
                         <i data-lucide="plus" class="w-5 h-5"></i>
                     </button>
                 </div>
-
-                <div class="flex-grow overflow-y-auto border border-slate-800/80 rounded-xl bg-slate-950/80 p-3 flex flex-wrap gap-2 items-start content-start" id="keyword-container">
-                    <!-- Keywords injected here -->
-                </div>
-
+                <div class="flex-grow overflow-y-auto border border-slate-800/80 rounded-xl bg-slate-950/80 p-3 flex flex-wrap gap-2 items-start content-start" id="keyword-container"></div>
                 <div class="mt-4 flex justify-end">
                     <button id="btn-reset-keywords" class="text-xs text-slate-400 hover:text-blue-400 flex items-center gap-1.5 transition-all">
                         <i data-lucide="refresh-ccw" class="w-3.5 h-3.5"></i>
@@ -171,7 +146,6 @@
                 </div>
             </div>
 
-            <!-- Nhật ký -->
             <div class="bg-slate-850 border border-slate-850 p-6 rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl">
                 <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                     <i data-lucide="activity" class="w-4 h-4 text-blue-500"></i> Nhật ký phiên thao tác
@@ -181,10 +155,8 @@
                 </div>
             </div>
         </div>
-
     </main>
 
-    <!-- Toast Notification (Popup thông báo) -->
     <div id="toast" class="fixed bottom-5 right-5 bg-slate-800 border-l-4 border-blue-500 text-slate-200 px-6 py-4 rounded shadow-2xl hidden items-center gap-3 z-50">
         <i data-lucide="check-circle" class="w-5 h-5 text-blue-400"></i>
         <div>
@@ -193,37 +165,228 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="border-t border-slate-800 bg-slate-950/85 py-4 text-center text-[11px] text-slate-500">
         <p>© 2026 Bing Auto-Searcher v3.0 • Khuyên dùng chạy trên GitHub Pages để có hiệu quả tối ưu nhất!</p>
     </footer>
 
     <script>
-        // Default Keywords (100 đa dạng từ khóa mẫu chống trùng lặp)
         const defaultKeywords = [
-            "khám phá hố đen vũ trụ", "giá bitcoin hôm nay", "cách làm bánh flan mềm mịn", "địa điểm du lịch đà lạt 2026", "review điện thoại iphone 17",
-            "cách học tiếng anh giao tiếp", "bài tập giảm mỡ bụng", "tình hình kinh tế thế giới", "phim bom tấn chiếu rạp", "trang trí phòng ngủ vintage",
-            "thuyết tương đối của einstein", "lịch sử triều đại nhà nguyễn", "cách trồng cây sen đá", "mẹo tiết kiệm tiền", "review sách nhà giả kim",
-            "cách sửa lỗi máy tính màn hình xanh", "nhạc lofi không lời chill", "dự báo thời tiết ngày mai", "công nghệ trí tuệ nhân tạo ai", "cách làm marketing online",
-            "kiến thức đầu tư chứng khoán", "nguyên lý hoạt động động cơ điện", "kỹ năng mềm cho sinh viên", "review xe ô tô điện vinfast", "địa điểm phượt tây bắc",
-            "cách nấu bún bò huế", "phân biệt chó husky và alaska", "cấu hình pc gaming 15 triệu", "cách chọn nước hoa nam", "tử vi cung thiên bình",
-            "các loại vitamin tốt cho da", "kỹ thuật chụp ảnh chân dung", "app quản lý chi tiêu", "cách làm cv xin việc ấn tượng", "xu hướng thời trang gen z",
-            "mẹo chơi cờ vua thắng", "cách làm sữa chua tại nhà", "du lịch sapa mùa đông", "công cụ lập trình python", "giải vô địch bóng đá thế giới",
-            "tìm hiểu về Metaverse", "kính viễn vọng James Webb", "cách làm thiệp handmade", "máy lọc không khí loại nào tốt", "cách bảo mật wifi",
-            "triệu chứng thiếu hụt canxi", "cách trồng rau sạch ban công", "mẹo làm sạch giày trắng", "review phim hoạt hình ghibli", "lợi ích của việc đọc sách",
-            "lịch sử phát minh ra internet", "kiến trúc nhà cấp 4 đẹp", "mẹo học thuộc bài nhanh", "bí quyết sống lâu của người nhật", "cách nấu chè dưỡng nhan",
-            "nguyên nhân gây rụng tóc", "cách nuôi cá cảnh trong nhà", "review tai nghe bluetooth ngon", "mẹo ngủ ngon sâu giấc", "cách viết hóa đơn điện tử",
-            "tìm hiểu triết học khắc kỷ", "tỷ giá usd hôm nay", "món ngon từ ức gà", "bí quyết chụp ảnh flatlay", "cách bảo dưỡng xe máy định kỳ",
-            "tác dụng của trà xanh", "cách dọn dẹp nhà tối giản", "mẹo trị ho bằng dân gian", "hướng dẫn tạo kênh youtube", "cách chọn size quần áo online",
-            "lịch thi đấu cúp c1 hôm nay", "phim khoa học viễn tưởng hay nhất", "các bước chăm sóc da mụn", "mẹo tẩy vết ố trên áo", "cách làm salad giảm cân",
-            "học phí đại học ngoại thương", "review bàn phím cơ giá rẻ", "tại sao bầu trời có màu xanh", "cách thắt cà vạt đơn giản", "lợi ích của nước dừa",
-            "mẹo chữa bỏng nhẹ tại nhà", "cách lập kế hoạch tài chính cá nhân", "tải hình nền máy tính 4k", "tìm hiểu phong thủy phòng khách", "cách tập squat đúng tư thế",
-            "review robot hút bụi thông minh", "các món lẩu ngon dễ làm", "mẹo khử mùi tủ lạnh", "lợi ích của thiền định", "cách pha cà phê phin đậm đà"
+            // ── CHỦ ĐỀ GỐC (100) ──
+            "khám phá hố đen vũ trụ","giá bitcoin hôm nay","cách làm bánh flan mềm mịn","địa điểm du lịch đà lạt 2026","review điện thoại iphone 17",
+            "cách học tiếng anh giao tiếp","bài tập giảm mỡ bụng","tình hình kinh tế thế giới","phim bom tấn chiếu rạp","trang trí phòng ngủ vintage",
+            "thuyết tương đối của einstein","lịch sử triều đại nhà nguyễn","cách trồng cây sen đá","mẹo tiết kiệm tiền","review sách nhà giả kim",
+            "cách sửa lỗi máy tính màn hình xanh","nhạc lofi không lời chill","dự báo thời tiết ngày mai","công nghệ trí tuệ nhân tạo ai","cách làm marketing online",
+            "kiến thức đầu tư chứng khoán","nguyên lý hoạt động động cơ điện","kỹ năng mềm cho sinh viên","review xe ô tô điện vinfast","địa điểm phượt tây bắc",
+            "cách nấu bún bò huế","phân biệt chó husky và alaska","cấu hình pc gaming 15 triệu","cách chọn nước hoa nam","tử vi cung thiên bình",
+            "các loại vitamin tốt cho da","kỹ thuật chụp ảnh chân dung","app quản lý chi tiêu","cách làm cv xin việc ấn tượng","xu hướng thời trang gen z",
+            "mẹo chơi cờ vua thắng","cách làm sữa chua tại nhà","du lịch sapa mùa đông","công cụ lập trình python","giải vô địch bóng đá thế giới",
+            "tìm hiểu về Metaverse","kính viễn vọng James Webb","cách làm thiệp handmade","máy lọc không khí loại nào tốt","cách bảo mật wifi",
+            "triệu chứng thiếu hụt canxi","cách trồng rau sạch ban công","mẹo làm sạch giày trắng","review phim hoạt hình ghibli","lợi ích của việc đọc sách",
+            "lịch sử phát minh ra internet","kiến trúc nhà cấp 4 đẹp","mẹo học thuộc bài nhanh","bí quyết sống lâu của người nhật","cách nấu chè dưỡng nhan",
+            "nguyên nhân gây rụng tóc","cách nuôi cá cảnh trong nhà","review tai nghe bluetooth ngon","mẹo ngủ ngon sâu giấc","cách viết hóa đơn điện tử",
+            "tìm hiểu triết học khắc kỷ","tỷ giá usd hôm nay","món ngon từ ức gà","bí quyết chụp ảnh flatlay","cách bảo dưỡng xe máy định kỳ",
+            "tác dụng của trà xanh","cách dọn dẹp nhà tối giản","mẹo trị ho bằng dân gian","hướng dẫn tạo kênh youtube","cách chọn size quần áo online",
+            "lịch thi đấu cúp c1 hôm nay","phim khoa học viễn tưởng hay nhất","các bước chăm sóc da mụn","mẹo tẩy vết ố trên áo","cách làm salad giảm cân",
+            "học phí đại học ngoại thương","review bàn phím cơ giá rẻ","tại sao bầu trời có màu xanh","cách thắt cà vạt đơn giản","lợi ích của nước dừa",
+            "mẹo chữa bỏng nhẹ tại nhà","cách lập kế hoạch tài chính cá nhân","tải hình nền máy tính 4k","tìm hiểu phong thủy phòng khách","cách tập squat đúng tư thế",
+            "review robot hút bụi thông minh","các món lẩu ngon dễ làm","mẹo khử mùi tủ lạnh","lợi ích của thiền định","cách pha cà phê phin đậm đà",
+
+            // ── CHỦ ĐỀ 1: MẸO VẶT & GIA ĐÌNH (100) ──
+            "mẹo vặt nhà bếp hay","cách làm sạch nồi bị cháy","tẩy vết ố vàng trên áo trắng","cách bảo quản rau tươi lâu","khử mùi hôi tủ lạnh hiệu quả",
+            "mẹo đuổi muỗi tự nhiên","cách thông tắc bồn rửa bát","làm sạch kính nhà tắm","mẹo sắp xếp tủ quần áo gọn","cách giặt giày trắng sạch",
+            "khử mùi sơn nhà mới","cách trồng hành lá tại nhà","mẹo lau nhà sạch bóng","tẩy vết mực trên quần áo","cách tự sửa vòi nước rò rỉ",
+            "mẹo ủi đồ không bị bóng vải","cách vệ sinh máy giặt","làm sạch thớt gỗ đúng cách","mẹo bảo quản trứng tươi lâu","tự làm nước lau kính tại nhà",
+            "mẹo đuổi kiến cánh vào nhà","cách đuổi gián hiệu quả","làm sạch vết dầu mỡ trên tường","mẹo cắm hoa tươi lâu hơn","cách chọn hoa quả chín ngon",
+            "tẩy rỉ sét trên đồ kim loại","mẹo vá quần áo rách khéo","cách làm nến thơm tại nhà","vệ sinh lò vi sóng trong 5 phút","mẹo mở khóa bị kẹt",
+            "mẹo luộc trứng dễ bóc vỏ","cách muối dưa cải giòn ngon","khử mùi tanh của cá","mẹo nhổ lông vịt nhanh","cách nấu cơm không bị nhão",
+            "mẹo chiên cá không bị bắn dầu","cách bảo quản thịt trong tủ lạnh","làm bánh mì bằng nồi chiên không dầu","mẹo ướp thịt nướng mềm","cách pha nước chấm ốc ngon",
+            "cách trị kiến ba khoang cắn","mẹo sơ cứu khi bị bỏng","cách hạ sốt nhanh tại nhà","mẹo chữa mất ngủ ban đêm","cách giảm đau răng cấp tốc",
+            "bấm huyệt chữa đau đầu","mẹo chữa hóc xương cá","cách xử lý khi bị ong đốt","mẹo giảm đau bụng kinh","cách trị ho dứt điểm tại nhà",
+            "mẹo làm sạch máy hút mùi","cách lau màn hình tivi an toàn","tẩy keo 502 dính vào tay","mẹo dọn nhà nhanh đón tết","cách làm sạch sofa vải",
+            "khử mùi hôi giày thể thao","mẹo thắt cà vạt nhanh đẹp","cách gấp chăn màn vuông vức","mẹo tiết kiệm điện trong gia đình","cách dùng máy điều hòa tiết kiệm",
+            "mẹo xếp hành lý gọn khi du lịch","cách làm sạch dây bạc bị đen","mẹo gọt dứa nhanh đẹp","cách bóc tỏi nhanh số lượng lớn","mẹo thái hành tây không cay mắt",
+            "khử vị đắng của mướp đắng","cách chọn mua hải sản tươi","mẹo bảo quản bơ chín","cách làm dầu hành béo ngậy","mẹo ngâm chân nước muối gừng",
+            "cách chọn gối ngủ ngon","mẹo trị nghẹt mũi cho trẻ","cách làm sữa chua tại nhà","mẹo làm bánh flan không bị rỗ","cách nấu nước lẩu thái",
+            "mẹo pha cà phê phin đậm đà","cách làm trà chanh giã tay","mẹo ngâm măng chua không hỏng","cách rửa sứa biển sạch","mẹo luộc gà da vàng giòn",
+            "cách kho cá không bị nát","mẹo làm sạch da bò","tẩy vết kẹo cao su dính quần áo","mẹo đánh bóng đồ gỗ","cách làm sạch rèm cửa",
+            "mẹo trồng rau mầm bằng giấy ăn","cách chăm sóc cây hoa hồng","mẹo trị nấm cho cây cảnh","cách bón phân cho sen đá","mẹo làm đất trồng rau",
+            "cách tự làm phân hữu cơ","mẹo nuôi cá cảnh cho người mới","cách dạy chó đi vệ sinh đúng chỗ","khử mùi hôi lông thú cưng","mẹo tắm cho mèo dễ dàng",
+
+            // ── CHỦ ĐỀ 2: CÔNG NGHỆ & ĐIỆN TỬ (100) ──
+            "xu hướng ai mới nhất 2026","điện thoại gập tốt nhất hiện nay","đánh giá card đồ họa mới","cách tự build pc gaming","hệ điều hành window mới nhất",
+            "mẹo tối ưu hóa win 11","cách tăng tốc mạng internet","top ứng dụng chỉnh sửa ảnh","phần mềm dựng phim chuyên nghiệp","công nghệ màn hình oled mới",
+            "hướng dẫn sử dụng chatgpt","cách tạo ảnh bằng trí tuệ nhân tạo","top công cụ ai cho lập trình viên","ứng dụng dịch ngôn ngữ tốt nhất","cách bảo mật tài khoản facebook",
+            "phòng chống mã độc mã hóa dữ liệu","cách chọn mua router wifi mạnh","thiết bị nhà thông minh tốt nhất","đồng hồ thông minh đo sức khỏe","tai nghe chống ồn cao cấp",
+            "đánh giá chip intel thế hệ mới","so sánh amd và intel","công nghệ sạc nhanh mới nhất","pin lithium-ion hoạt động thế nào","cách khôi phục dữ liệu đã xóa",
+            "phần mềm diệt virus miễn phí tốt","cách đồng bộ dữ liệu đám mây","hướng dẫn sử dụng google drive","mẹo dùng excel văn phòng","phím tắt word hay dùng",
+            "cách kết nối máy in qua wifi","sửa lỗi laptop không lên nguồn","cách vệ sinh bàn phím cơ","chuột gaming không dây tốt nhất","bàn phím custom là gì",
+            "công nghệ xe điện tự lái","hệ thống pin xe điện tesla","mạng di động 6g khi nào có","thiết bị thực tế ảo vr mới","kính thông minh ar có tác dụng gì",
+            "cách quay video màn hình máy tính","phần mềm livestream tốt nhất","cách cài đặt obs studio","chỉnh âm thanh bằng audacity","làm nhạc edm trên máy tính",
+            "học lập trình python căn bản","html và css cho người mới","framework javascript phổ biến","cách tạo kho lưu trữ github","lập trình ứng dụng flutter",
+            "công nghệ blockchain ứng dụng gì","tiền điện tử hoạt động thế nào","ví lạnh lưu trữ crypto","web3 là gì khác gì web2","nft là gì có giá trị không",
+            "cách đổi mật khẩu wifi","sửa lỗi mạng chấm than vàng","cách bấm đầu dây mạng cat6","thiết bị lưu trữ nas gia đình","ổ cứng ssd nvme tốc độ cao",
+            "cách cài win bằng usb","format ổ cứng định dạng ntfs","cách kiểm tra nhiệt độ cpu","phần mềm ép xung card đồ họa","cách test màn hình lỗi sọc",
+            "sửa lỗi camera laptop bị mờ","cách kết nối tai nghe bluetooth","mẹo tiết kiệm pin iphone","cách giải phóng dung lượng android","tải video tiktok không logo",
+            "cách dùng canva thiết kế free","phần mềm photoshop bản mới nhất","công cụ vẽ vector illustrator","cách tạo file pdf từ ảnh","phần mềm nén file winrar",
+            "tiêu chuẩn kháng nước ip68","công nghệ kính cường lực mới","tần số quét màn hình 120hz","độ phân giải màn hình 4k 8k","cáp hdmi và displayport khác gì",
+            "tác hại của ánh sáng xanh","cách bật chế độ tối dark mode","ứng dụng quản lý thời gian hiệu quả","phần mềm học tiếng anh miễn phí","ví điện tử phổ biến việt nam",
+            "cách quét mã qr an toàn","bảo mật sinh trắc học là gì","nhận diện khuôn mặt face id","cảm biến vân tay dưới màn hình","cách dùng esim trên điện thoại",
+
+            // ── CHỦ ĐỀ 3: SỨC KHỎE & Y TẾ (100) ──
+            "chế độ ăn eat clean giảm cân","thực đơn keto 7 ngày ngắn hạn","tác dụng của việc đi bộ","tập yoga tại nhà cho người mới","bài tập cardio đốt mỡ nhanh",
+            "cách tính chỉ số bmi","lượng calo cần thiết mỗi ngày","tác hại của việc thức khuya","lợi ích của việc uống nước lọc","thực phẩm giàu omega 3",
+            "dấu hiệu cơ thể thiếu vitamin","cách tăng cường hệ miễn dịch","bổ sung canxi đúng cách","tác dụng của nước ép cần tây","ăn gì để giảm mỡ bụng",
+            "cách chăm sóc da mụn tại nhà","các bước skincare cơ bản ban đêm","kem chống nắng cho da dầu mụn","tác dụng của retinol đối với da","cách trị thâm mắt hiệu quả",
+            "nguyên nhân gây rụng tóc nhiều","cách dưỡng tóc mềm mượt bồng bềnh","dấu hiệu bệnh tiểu đường tuýp 2","cách phòng ngừa huyết áp cao","triệu chứng của bệnh đau dạ dày",
+            "chế độ ăn cho người đau đại tràng","cách giảm cholesterol trong máu","tác hại của việc hút thuốc lá","rượu bia ảnh hưởng gan thế nào","cách thải độc gan tự nhiên",
+            "lợi ích của việc thiền định","cách giảm stress trong công việc","triệu chứng trầm cảm nhẹ","làm sao để có giấc ngủ sâu","bài tập chữa đau lưng cổ vai gáy",
+            "cách bảo vệ mắt khi dùng máy tính","khám sức khỏe định kỳ gồm những gì","tác dụng của đông trùng hạ thảo","nhân sâm có công dụng gì","cách dùng mật ong chữa bệnh",
+            "tác dụng của trà xanh đối với sức khỏe","ăn chay đủ chất như thế nào","tác hại của đồ ăn nhanh","đường tinh luyện nguy hiểm ra sao","cách cai nghiện nước ngọt",
+            "tập gym cần bổ sung whey protein","bài tập squat đúng tư thế","lợi ích của việc bơi lội","chạy bộ đúng cách không đau khớp","cách giãn cơ sau khi tập luyện",
+            "dấu hiệu cơ thể bị mất nước","nhiệt miệng ăn gì cho nhanh khỏi","cách trị táo bón hiệu quả","sốt xuất huyết cần kiêng gì","phòng ngừa cúm mùa theo thời tiết",
+            "tác dụng của tỏi đen","uống tinh bột nghệ có tốt không","cách chữa đầy bụng khó tiêu","dấu hiệu thiếu máu lên não","bệnh đột quỵ phòng ngừa thế nào",
+            "tác hại của việc ngồi nhiều","cách cải thiện tư thế đứng thẳng","sức khỏe tinh thần là gì","cách xây dựng lối sống lành mạnh","lợi ích của việc đọc sách",
+            "khám răng định kỳ mấy tháng một lần","cách tẩy trắng răng tại nhà","kem đánh răng chống ê buốt tốt","tác hại của việc lười vận động","ăn gì tốt cho trí nhớ",
+            "thực phẩm giúp tăng chiều cao","chăm sóc bà bầu 3 tháng đầu","thực đơn cho mẹ bỉm sữa nhiều sữa","cách dỗ trẻ sơ sinh khóc đêm","tiêm phòng cho trẻ sơ sinh lịch",
+            "tác dụng của quả bơ","ăn chuối có tác dụng gì","tác dụng của táo đỏ kỷ tử","cách nấu nước mát thanh nhiệt","uống nước dừa có tác dụng gì",
+            "tác hại của việc nhịn ăn sáng","ăn hạt ngũ cốc dinh dưỡng","tác dụng của hạt chia","hạt óc chó tốt cho não bộ","cách ngâm rượu tỏi đúng cách",
+            "bệnh gout kiêng ăn những gì","cách giảm đau xương khớp mùa lạnh","tác dụng của dầu tràm","vệ sinh mũi bằng nước muối sinh lý","cách chọn mua máy đo huyết áp",
+
+            // ── CHỦ ĐỀ 4: ẨM THỰC & NẤU ĂN (100) ──
+            "cách nấu phở bò truyền thống","bún chả hà nội làm thế nào ngon","công thức làm bánh mì việt nam","cách làm nem rán giòn lâu","bí quyết nấu thịt kho tàu ngon",
+            "cách nấu canh chua cá lóc","làm gà rán kfc tại nhà","công thức ướp thịt bò né","cách làm sườn xào chua ngọt","bún đậu mắm tôm tự làm",
+            "cách nấu bò kho ăn bánh mì","làm bánh tráng trộn sa tế","công thức nước sốt chấm đồ nướng","cách làm kim chi cải thảo hàn quốc","nấu canh bóng thập cẩm tết",
+            "cách làm chân gà sả tắc giòn","làm trà sữa trân châu đường đen","công thức làm caramen mịn không rỗ","bánh bông lan bằng nồi cơm điện","cách làm sữa đậu nành thơm ngon",
+            "cách kho cá trắm riềng sả","nấu cháo ếch singapore","cách làm vịt quay bắc kinh","làm lạp xưởng tươi tại nhà","công thức nấu cari gà",
+            "cách làm mì ý sốt bò băm","làm pizza bằng chảo chống dính","cách rán đậu hũ vàng giòn","nấu canh măng mọc sườn heo","cách làm nộm ngó sen tôm thịt",
+            "làm xôi gấc đỏ tươi dẻo","công thức nấu chè bưởi không đắng","cách làm kem chuối cốt dừa","làm sữa chua nếp cẩm dẻo","cách ngâm mơ đường làm nước giải khát",
+            "cách muối cà pháo trắng giòn","làm bánh xèo miền tây giòn rụm","cách nấu bún riêu cua đồng","làm bánh cuốn bằng chảo","công thức làm chả quế ngon",
+            "cách nấu súp gà nấm ngô ngọt","làm mực nhồi thịt sốt cà chua","cách làm tôm rang thịt ba chỉ","nấu canh cua rau đay mồng tơi","cách làm cà tím mỡ hành",
+            "làm nộm tai heo dưa chuột","công thức pha nước mắm chua ngọt","cách làm ớt chưng ăn phở","làm muối ớt xanh chấm hải sản","cách kho quẹt chấm rau củ luộc",
+            "cách nấu chè dưỡng nhan tuyết yến","làm bánh quy bơ thơm ngon","công thức bánh trung thu thập cẩm","cách làm mứt dừa ngũ sắc tết","nấu xôi xéo hành phi",
+            "cách làm giò lụa không hàn lạp","làm nem chua thanh hóa đúng vị","cách pha cà phê trứng hà nội","làm sinh tố bơ béo ngậy","cách nấu nước sâm dứa",
+            "cách làm cá hồi áp chảo sốt chanh leo","làm bò bít tết khoai tây chiên","công thức làm salad nga","cách nấu canh rong biển sườn non","làm cơm cuộn kimbap hàn quốc",
+            "cách làm bánh tokbokki cay","làm gà hấp lá chanh","cách nướng thịt bằng nồi chiên không dầu","làm sườn nướng bbq","cách làm muối vừng lạc",
+            "cách nấu canh hẹ thịt băm","làm mướp đắng xào trứng","cách làm nấm đùi gà sốt dầu hào","làm đậu hũ non sốt tả pí lù","cách nấu cháo thịt băm gừng",
+            "cách làm nước đậu đen rang","làm trà tắc mật ong giải nhiệt","công thức pha trà vải thơm ngon","cách nấu nước rau má đường phèn","làm bánh tẻ sơn tây",
+            "cách gói bánh chưng xanh ngày tết","làm dưa món đu đủ cà rốt","cách muối hành củ ngọt giòn","làm thịt bò khô xé sợi","cách làm heo khô cháy tỏi",
+            "cách làm lẩu nấm thanh đạm","làm ốc nấu chuối đậu tía tô","cách làm chả cá lã vọng","nấu canh cải cúc thịt băm","cách làm mắm tép chưng thịt",
+
+            // ── CHỦ ĐỀ 5: DU LỊCH & KHÁM PHÁ (100) ──
+            "kinh nghiệm du lịch sapa tự túc","địa điểm checkin hạ long đẹp","du lịch đà nẵng 4 ngày 3 đêm","món ăn ngon phải thử ở huế","khám phá phố cổ hội an về đêm",
+            "kinh nghiệm đi nha trang giá rẻ","địa điểm du lịch đà lạt lãng mạn","quán cà phê view đẹp đà lạt","khám phá đảo phú quốc mùa nào đẹp","du lịch côn đảo tâm linh",
+            "kinh nghiệm phượt hà giang bằng xe máy","ngắm mùa lúa chín mù cang chải","khám phá hang sơn đoòng quảng bình","địa điểm du lịch ninh bình","trải nghiệm chợ nổi cái răng",
+            "du lịch mũi né phan thiết có gì","khám phá đảo lý sơn quảng ngãi","kinh nghiệm đi phượt tà xùa săn mây","địa điểm du lịch ba vì cuối tuần","khám phá tam đảo vĩnh phúc",
+            "kinh nghiệm du lịch thái lan tự túc","địa điểm mua sắm ở bangkok","du lịch singapore cần chuẩn bị gì","khám phá kuala lumpur malaysia","kinh nghiệm du lịch bali indonesia",
+            "địa điểm du lịch nhật bản mùa hoa anh đào","kinh nghiệm xin visa du lịch hàn quốc","khám phá đảo jeju mộng mơ","du lịch trung quốc phượng hoàng cổ trấn","kinh nghiệm đi vạn lý trường thành",
+            "địa điểm du lịch châu âu lãng mạn","kinh nghiệm phượt bụi nước pháp","khám phá thành phố rome nước ý","du lịch Thụy Sĩ mùa đông ngắm tuyết","kinh nghiệm đi du lịch nước úc",
+            "địa điểm cắm trại gần hà nội","khu du lịch sinh thái gần sài gòn","kinh nghiệm đi cáp treo fansipan","khám phá vương quốc hang động phong nha","địa điểm tắm khoáng nóng gần đây",
+            "kinh nghiệm săn vé máy bay giá rẻ","cách đặt phòng khách sạn trên agoda","app đặt phòng homestay uy tín","chuẩn bị hành lý đi du lịch biển","mẹo tránh bị lừa đảo khi du lịch",
+            "địa điểm phượt miền tây sông nước","khám phá rừng tràm trà sư an giang","du lịch mũi cà mau điểm cực nam","kinh nghiệm đi đảo bình ba","địa điểm du lịch vũng tàu cuối tuần",
+            "món ăn đặc sản sơn la","khám phá cao nguyên mộc châu","địa điểm du lịch cao bằng thác bản giốc","kinh nghiệm đi hồ ba bể bắc kạn","khám phá vườn quốc gia cúc phương",
+            "địa điểm du lịch bụi cho sinh viên","tour du lịch nước ngoài trọn gói","kinh nghiệm đi tàu hỏa ngắm cảnh","khám phá các hòn đảo hoang sơ","địa điểm trekking lý tưởng việt nam",
+            "kinh nghiệm leo núi nhân tạo","chuẩn bị đồ đi leo núi fansipan","khám phá cố đô hoa lư ninh bình","địa điểm vui chơi phú quốc united center","trải nghiệm vinwonders nha trang",
+            "khám phá đảo cát bà hải phòng","địa điểm du lịch thanh hóa sầm sơn","kinh nghiệm đi đảo cô tô quảng ninh","khám phá quan lạn minh châu","địa điểm du lịch nghệ an cửa lò",
+            "khám phá phong nha kẻ bàng","kinh nghiệm đi bằng tàu thủy nội địa","địa điểm ngắm hoàng hôn đẹp nhất","quán ăn vỉa hè ngon ở sài gòn","khám phá nhà thờ đức bà dinh độc lập",
+            "địa điểm du lịch tây ninh núi bà đen","kinh nghiệm đi khu du lịch đại nam","khám phá vùng đất bảy núi an giang","địa điểm du lịch bạc liêu nhà công tử","khám phá đảo phú quý bình thuận",
+            "kinh nghiệm du lịch tự túc singapore malaysia","địa điểm du lịch lào thiên nhiên","khám phá đền angkor wat campuchia","kinh nghiệm đi du lịch bụi philippines","khám phá đài loan mộc mạc",
+
+            // ── CHỦ ĐỀ 6: KHOA HỌC & GIÁO DỤC (100) ──
+            "thuyết tương đối của einstein","hố đen vũ trụ hoạt động thế nào","hệ mặt trời gồm những hành tinh nào","nguồn gốc của loài người","thuyết tiến hóa của darwin",
+            "cấu trúc của dna và rna","bảng tuần hoàn các nguyên tố hóa học","nguyên lý hoạt động của bom nguyên tử","hiện tượng hiệu ứng nhà kính","biến đổi khí hậu toàn cầu",
+            "tại sao bầu trời có màu xanh","hiện tượng cầu vồng xuất hiện khi nào","nguyên nhân gây ra động đất","sóng thần hình thành như thế nào","núi lửa phun trào do đâu",
+            "công nghệ tế bào gốc là gì","bản đồ gene người hoàn chỉnh","khủng long tuyệt chủng khi nào","kỷ băng hà gần nhất xảy ra khi nào","bí ẩn kim tự tháp ai cập",
+            "cách học tiếng anh giao tiếp nhanh","phương pháp học toán tư duy","cách ghi nhớ từ vựng lâu","phương pháp học tập pomodoro","sơ đồ tư duy mindmap là gì",
+            "kỹ năng thuyết trình trước đám đông","cách viết bài luận tiếng anh hay","kinh nghiệm thi ielts đạt điểm cao","bí quyết ôn thi đại học hiệu quả","cách làm bài thi trắc nghiệm nhanh",
+            "trí tuệ nhân tạo thay đổi giáo dục","mô hình học tập trực tuyến","top trường đại học hàng đầu việt nam","du học học bổng toàn phần cần gì","ngành học hot nhất tương lai",
+            "khoa học vũ trụ mới nhất","kính viễn vọng không gian james webb","sự sống trên sao hỏa có thật không","vận tốc ánh sáng là bao nhiêu","năm ánh sáng tính như thế nào",
+            "hiện tượng nguyệt thực nhật thực","sao chổi halley bao năm xuất hiện","cấu tạo nội tâm trái đất","áp suất khí quyển là gì","lực hấp dẫn của trái đất",
+            "định luật vạn vật hấp dẫn newton","cơ học lượng tử căn bản","hiện tượng siêu dẫn là gì","nguyên tử và phân tử khác gì nhau","phản ứng hạt nhân nhân tạo",
+            "vật chất tối và năng lượng tối","đa vũ trụ có thật không","lỗ sâu vũ trụ wormhole","hiện tượng hiệu ứng bươm bướm","nguyên lý bất định heisenberg",
+            "cách làm nghiên cứu khoa học","cấu trúc luận văn tốt nghiệp","phương pháp thuyết trình ppt đẹp","cách tìm tài liệu tham khảo uy tín","thư viện điện tử quốc gia",
+            "học từ vựng tiếng anh qua bài hát","ngữ pháp tiếng anh cơ bản cần nhớ","cách phát âm chuẩn ed và s","bảng phiên âm quốc tế ipa","app luyện nói tiếng anh ai",
+            "toán học ứng dụng trong đời sống","ý nghĩa của số pi","dãy số fibonacci và tỉ lệ vàng","định lý pytago trong hình học","công thức tính diện tích hình tròn",
+            "lịch sử thế giới cổ đại tóm tắt","cuộc cách mạng công nghiệp lần 4","chiến tranh thế giới thứ hai nguyên nhân","lịch sử văn minh lúa nước","vị vua đầu tiên của việt nam",
+            "ý nghĩa của ngày quốc khánh","di sản văn hóa thế giới việt nam","vịnh hạ long được công nhận khi nào","địa lý các vùng kinh tế việt nam","bản đồ địa hình việt nam",
+            "cách bảo vệ môi trường sống","phân loại rác thải tại nguồn","tác hại của rác thải nhựa","năng lượng tái tạo năng lượng xanh","nguyên lý điện mặt trời",
+
+            // ── CHỦ ĐỀ 7: TÀI CHÍNH & KINH DOANH (100) ──
+            "cách quản lý tài chính cá nhân","quy tắc sáu chiếc lọ tài chính","bí quyết tiết kiệm tiền lương","đầu tư chứng khoán cho người mới","cách đọc bảng giá chứng khoán",
+            "quỹ mở và quỹ đóng khác gì","đầu tư bất động sản an toàn","lãi suất ngân hàng nào cao nhất","cách tính lãi suất vay trả góp","thẻ tín dụng là gì lưu ý dùng",
+            "cách mở tài khoản chứng khoán online","cổ phiếu và trái phiếu là gì","kinh doanh online nên bán gì","cách chạy quảng cáo facebook hiệu quả","tối ưu chi phí vận hành doanh nghiệp",
+            "mô hình kinh doanh nhượng quyền","cách lập kế hoạch kinh doanh mẫu","kỹ năng đàm phán trong kinh doanh","nghệ thuật chốt sale đỉnh cao","chăm sóc khách hàng chuyên nghiệp",
+            "lạm phát là gì ảnh hưởng thế nào","suy thoái kinh tế toàn cầu","chỉ số gdp và gnp là gì","ngân hàng trung ương vai trò","chính sách tiền tệ điều tiết kinh tế",
+            "cách đầu tư vàng tích lũy","tỷ giá ngoại tệ hôm nay vietcombank","thị trường ngoại hối forex là gì","phân tích kỹ thuật chứng khoán","đọc báo cáo tài chính doanh nghiệp",
+            "bảng cân đối kế toán gồm những gì","báo cáo kết quả kinh doanh","dòng tiền thu chi quản lý thế nào","ý nghĩa của chỉ số eps và pe","cổ tức là gì nhận thế nào",
+            "cách khởi nghiệp với số vốn nhỏ","ý tưởng kinh doanh quán cà phê","mở cửa hàng tạp hóa cần bao nhiêu vốn","kinh doanh quần áo thời trang tự túc","chiến lược marketing mix 4p",
+            "xây dựng thương hiệu cá nhân","seo website lên top google","quảng cáo google ads căn bản","bán hàng trên sàn thương mại điện tử","cách livestream bán hàng nghìn đơn",
+            "quản trị nhân sự trong công ty","cách giữ chân nhân tài","văn hóa doanh nghiệp là gì","kỹ năng lãnh đạo quản lý team","cách giải quyết xung đột nội bộ",
+            "bảo hiểm nhân thọ có nên mua không","phân biệt bảo hiểm xã hội bảo hiểm y tế","chế độ thai sản mới nhất","luật lao động quy định thử việc","cách tính thuế thu nhập cá nhân",
+            "giảm thuế giá trị gia tăng vat","thủ tục thành lập công ty tnhh","đăng ký mã số thuế doanh nghiệp","hóa đơn điện tử sử dụng thế nào","quy trình giải thể doanh nghiệp",
+            "thị trường chứng khoán mỹ","chỉ số vnindex là gì","cá mập tài chính shark tank","gọi vốn đầu tư startup","quỹ đầu tư mạo hiểm là gì",
+            "phương pháp làm giàu từ hai bàn tay trắng","tư duy tài chính người giàu","sách dạy kinh doanh hay nhất mọi thời đại","cha giàu cha nghèo bài học","bí mật tư duy triệu phú tóm tắt",
+            "cách quản lý nợ thẻ tín dụng","bùng nợ ngân hàng hậu quả gì","cic là gì kiểm tra nợ xấu","cách xóa nợ xấu ngân hàng","cho vay thế chấp và tín chấp",
+            "cách mua nhà trả góp an toàn","kinh nghiệm mua đất nền dự án","thủ tục sang tên sổ đỏ","chi phí trước bạ nhà đất","luật đất đai mới nhất áp dụng",
+
+            // ── CHỦ ĐỀ 8: ĐIỆN ẢNH & GIẢI TRÍ (100) ──
+            "top phim chiếu rạp hay nhất năm","phim đoạt giải oscar mới nhất","đánh giá phim bom tấn hollywood","phim kinh dị đáng xem nhất","phim hoạt hình anime cảm động",
+            "phim truyền hình việt nam hot","dàn diễn viên phim hành động nổi tiếng","đạo diễn xuất sắc nhất lịch sử","kịch bản phim xuất sắc","kỹ xảo điện ảnh hollywood",
+            "vũ trụ điện ảnh marvel","phim người máy biến hình","phim siêu anh hùng dc","phim viễn tưởng vũ trụ hay","phim tình cảm lãng mạn cày cuốc",
+            "phim hài hước giảm stress","phim trinh thám hack não","phim cổ trang trung quốc cung đấu","phim truyền hình hàn quốc rating cao","phim học đường thanh xuân",
+            "gameshow truyền hình ăn khách","rap việt mùa mới nhất","ca sĩ giấu mặt việt nam","chương trình thực tế vui nhộn","người mẫu hoa hậu nổi tiếng",
+            "tin tức showbiz việt mới nhất","scandal sao hạng a thế giới","đám cưới thế kỷ của sao","tiểu sử diễn viên nổi tiếng","phỏng vấn độc quyền ngôi sao",
+            "cách rạp chiếu phim vận hành","giá vé xem phim cgv","bắp rang bơ rạp phim làm thế nào","phim tài liệu khoa học hay","phim lịch sử việt nam ý nghĩa",
+            "liên hoan phim cannes","giải thưởng quả cầu vàng","phim ngắn nghệ thuật ý nghĩa","diễn viên lồng tiếng gạo cội","nhạc phim hay nhất mọi thời đại",
+            "nhà hát kịch nổi tiếng hà nội","liveshow ca nhạc hoành tráng","nghệ sĩ hài được yêu thích","kịch nói đời sống ý nghĩa","nghệ thuật múa rối nước",
+            "review phim netflix hay tuần này","phim độc quyền hbo max","phim hoạt hình disney kinh điển","phim pixar ý nghĩa sâu sắc","phim thanh xuân vườn trường",
+            "phim kiếm hiệp kim dung","phim võ thuật lý tử long","phim hành động thành long","phim của đạo diễn christopher nolan","phim inception giải thích kết thúc",
+            "phim interstellar khoa học chính xác","phim titanic câu chuyện hậu trường","avatar dòng chảy của nước doanh thu","phim hoạt hình ghibli hay nhất","vùng đất linh hồn ý nghĩa",
+            "mộ đom đóm lấy đi nước mắt","phim hàn quốc ký sinh trùng oscar","phim trò chơi con mực phần mới","phim vương triều xác sống","phim cung đấu chân hoàn truyện",
+            "phim minh lan truyện review","phim hành động sát thủ john wick","phim fast and furious phần mới","phim thảm họa thiên nhiên nghẹt thở","phim thây ma kinh dị",
+            "phim sinh tồn trên đảo hoang","phim ca nhạc hấp dẫn","phim la la land cái kết","phim hoạt hình doremon dài","phim conan thám tử lừng danh mới",
+            "phim tết việt nam doanh thu cao","phim của trấn thành mới nhất","phim lý hải lật mặt mấy","phim điện ảnh độc lập việt nam","diễn viên trẻ triển vọng",
+            "hậu trường quay phim điện ảnh","phân cảnh hành động nguy hiểm","diễn viên đóng thế vai","phòng vé box office việt nam","web đặt vé phim online nhanh",
+
+            // ── CHỦ ĐỀ 9: ÂM NHẠC & NGHỆ THUẬT (100) ──
+            "bảng xếp hạng âm nhạc việt nam","mv ca nhạc nhiều view nhất youtube","bài hát hot trend tiktok hôm nay","ca sĩ nam được yêu thích nhất","ca sĩ nữ có giọng hát khủng",
+            "nhạc lofi chill học bài","list nhạc nhẹ ngủ ngon","nhạc không lời piano thư giãn","nhạc nền không bản quyền youtube","cách tải nhạc mp3 chất lượng cao",
+            "hướng dẫn chơi đàn guitar cơ bản","hợp âm guitar bài hát phổ biến","cách tự học piano tại nhà","học thổi sáo trúc căn bản","đàn ukulele dễ chơi không",
+            "thể loại nhạc pop ballad là gì","nhạc rap underground việt nam","nhạc rock việt thời hoàng kim","nhạc jazz xuất xứ từ đâu","âm nhạc cổ điển mozart beethoven",
+            "tác dụng của âm nhạc với trí não","nhạc sóng não alpha tập trung","luyện thanh nhạc tại nhà đúng cách","cách mở giọng hát cao hơn","chữa khàn tiếng khi hát nhiều",
+            "liveshow ca nhạc lớn nhất thế giới","giải thưởng âm nhạc grammy","concert của idol kpop tại việt nam","nhóm nhạc bts và blackpink","làn sóng hallyu kpop thế giới",
+            "nghệ thuật hội họa phục hưng","bức tranh mona lisa bí ẩn","danh họa van gogh và tác phẩm","tranh sơn dầu phong cảnh đẹp","hướng dẫn vẽ tranh phong cảnh",
+            "cách phối màu cơ bản trong mỹ thuật","nghệ thuật thư pháp việt nam","triển lãm nghệ thuật đương đại","nghệ thuật điêu khắc đá","kiến trúc gothic châu âu",
+            "nhạc vàng nhạc trữ tình xưa","nhạc trịnh công sơn bất hủ","ca khúc xuân hải ngoại hay","nhạc cách mạng hào hùng việt nam","đờn ca tài tử nam bộ",
+            "nghệ thuật hát chèo đồng bằng bắc bộ","hát cải lương nghệ sĩ gạo cội","dân ca quan họ bắc ninh","nhã nhạc cung đình huế di sản","lễ hội âm nhạc quốc tế",
+            "bài hát quốc ca các nước","nhạc chuông điện thoại độc đáo","phần mềm nhận diện bài hát qua giai điệu","ứng dụng nghe nhạc spotify","apple music và youtube music",
+            "cách làm nhạc cụ tự chế","lợi ích cho trẻ học đàn sớm","nhạc thiếu nhi vui nhộn bé ăn ngon","ca khúc tiếng anh bất hủ","bài hát về tình bạn ý nghĩa",
+            "nhạc dance edm sôi động","dj nổi tiếng thế giới","lễ hội âm nhạc điện tử tomorrowland","nghệ thuật múa ba lê kinh điển","nhảy hiện đại dance cover",
+            "hiphop dance và breakdance","nghệ thuật vẽ tranh tường graffiti","tranh gốm sứ bát tràng","nghệ thuật làm tranh đông hồ","tranh khảm trai truyền thống",
+            "nhà hát lớn hà nội kiến trúc","thiết kế đồ họa mỹ thuật ứng dụng","nhiếp ảnh nghệ thuật bắt khoảnh khắc","cách chụp ảnh phong cảnh bằng điện thoại","app chỉnh màu ảnh đẹp nghệ thuật",
+            "nghệ thuật cắm hoa nhật bản ikebana","trà đạo nhật bản tinh tế","nghệ thuật làm gốm thủ công","vẽ tranh anime bằng máy tính","bảng vẽ điện tử wacom",
+            "font chữ nghệ thuật thiết kế","thiết kế logo thương hiệu đẹp","ý nghĩa của các màu sắc","âm nhạc thay đổi tâm trạng con người","nhạc thiền tịnh tâm giảm lo âu",
+
+            // ── CHỦ ĐỀ 10: THỂ THAO & ĐỜI SỐNG (100) ──
+            "kết quả bóng đá ngoại hạng anh","bảng xếp hạng cup c1 mới nhất","lịch thi đấu đội tuyển việt nam","quả bóng vàng thế giới thuộc về ai","cầu thủ xuất sắc nhất lịch sử",
+            "giải vô địch bóng đá thế giới world cup","thời gian diễn ra olympic tiếp theo","giải tennis wimbledon trực tiếp","giải đua xe công thức 1 f1","giải bóng rổ nhà nghề mỹ nba",
+            "hướng dẫn chơi cầu lông đúng kỹ thuật","cách chọn vợt cầu lông phù hợp","luật thi đấu bóng bàn cơ bản","học bơi ếch bơi sải nhanh","kỹ thuật sút bóng xoáy vòng cung",
+            "bài tập thể dục buổi sáng 10 phút","lợi ích của việc đạp xe mỗi ngày","môn thể thao tăng chiều cao tốt nhất","võ thuật vovinam việt nam","học võ taekwondo cho trẻ em",
+            "giải chạy marathon phong trào","kinh nghiệm chuẩn bị chạy 10km","giày chạy bộ tốt nhất hiện nay","thể thao điện tử esport dota liên minh","giải đấu liên quân mobile",
+            "cách xem trực tiếp bóng đá không giật","bình luận viên bóng đá được yêu thích","sân vận động lớn nhất thế giới","chi phí xây sân bóng cỏ nhân tạo","kinh doanh phòng gym cần gì",
+            "xu hướng thời trang streetwear 2026","phối đồ mùa đông nam nữ đẹp","cách chọn size quần áo chuẩn","thương hiệu giày sneaker nổi tiếng","mẹo phối màu quần áo tôn da",
+            "cách thắt dây giày độc đáo","vệ sinh giày da lộn đúng cách","mẫu tóc nam đẹp hot trend","kiểu tóc nữ ngắn cá tính","chăm sóc râu nam giới",
+            "nghệ thuật sống tối giản của người nhật","phương pháp dọn nhà konmari","cách cân bằng cuộc sống và công việc","kỹ năng giao tiếp ứng xử khéo léo","đắc nhân tâm bài học áp dụng",
+            "cách quản lý thời gian hiệu quả","lập kế hoạch mục tiêu năm mới","thói quen của người thành công","cách rèn luyện tư duy tích cực","vượt qua trì hoãn trong công việc",
+            "tự làm đồ handmade tặng người yêu","quà tặng sinh nhật ý nghĩa độc đáo","cách gói quà đẹp đơn giản","tổ chức tiệc sinh nhật ấm cúng","món ăn tiệc ngọt đơn giản",
+            "xu hướng kiến trúc nhà phố hiện đại","thiết kế phòng ngủ nhỏ ấm cúng","trang trí phòng khách không gian xanh","cây cảnh phong thủy trồng trong nhà","hướng nhà hợp tuổi 2026",
+            "kinh nghiệm mua xe máy cũ an toàn","giá xe ô tô điện mới nhất","quy trình thi bằng lái xe b2","mẹo lái xe an toàn ban đêm","cách tự thay lốp xe ô tô",
+            "lễ hội truyền thống đặc sắc việt nam","ý nghĩa tết nguyên đán cổ truyền","phong tục xông đất đầu năm","mâm ngũ quả ngày tết gồm những gì","cách viết sớ đi chùa đầu năm",
+            "văn hóa trà đá vỉa hè hà nội","cà phê bệt sài gòn nét văn hóa","trò chơi dân gian ngày tết","nghệ thuật ẩm thực đường phố","xu hướng đi cắm trại glamping",
+            "đồ dùng cần thiết khi đi cắm trại","cách dựng lều trại nhanh chống nước","mẹo sinh tồn trong rừng sâu","cách xác định phương hướng không có la bàn","sơ cứu chấn thương thể thao"
         ];
 
         let keywords = JSON.parse(localStorage.getItem('bing_auto_keywords_v3')) || [...defaultKeywords];
 
-        // DOM Elements
         const keywordContainer = document.getElementById('keyword-container');
         const inputNewKeyword = document.getElementById('input-new-keyword');
         const btnAdd = document.getElementById('btn-add');
@@ -231,16 +394,12 @@
         const searchLog = document.getElementById('search-log');
         const btnResetKeywords = document.getElementById('btn-reset-keywords');
         const toast = document.getElementById('toast');
-
-        // Tabs & Panels
         const tabSuperBtn = document.getElementById('tab-super-btn');
         const tabAutoBtn = document.getElementById('tab-auto-btn');
         const panelSuper = document.getElementById('panel-super');
         const panelAuto = document.getElementById('panel-auto');
         const superLinksContainer = document.getElementById('super-links-container');
         const btnRefreshSuper = document.getElementById('btn-refresh-super');
-
-        // Auto Search Controls
         const btnToggleAuto = document.getElementById('btn-toggle-auto');
         const btnTriggerSingle = document.getElementById('btn-trigger-single');
         const selectInterval = document.getElementById('select-interval');
@@ -253,9 +412,8 @@
         let currentInterval = 15;
         let autoTimer = null;
         let searchCount = 0;
-        let childWindow = null; // Biến giữ tham chiếu đến 1 Tab duy nhất
+        let childWindow = null;
 
-        // Render Tags
         function renderKeywords() {
             keywordContainer.innerHTML = '';
             keywordCount.innerText = `${keywords.length} từ khóa`;
@@ -285,11 +443,7 @@
             }
         });
 
-        inputNewKeyword.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                btnAdd.click();
-            }
-        });
+        inputNewKeyword.addEventListener('keydown', (e) => { if (e.key === 'Enter') btnAdd.click(); });
 
         btnResetKeywords.addEventListener('click', () => {
             if (confirm("Nạp lại danh sách từ khóa mặc định?")) {
@@ -303,12 +457,9 @@
             const timeString = new Date().toLocaleTimeString('vi-VN', { hour12: false });
             const logEntry = document.createElement('div');
             logEntry.className = 'py-1.5 border-b border-slate-900/50 flex items-center justify-between gap-3';
-            let badge = '';
-            if (type === 'copy') {
-                badge = '<span class="text-[9px] bg-violet-900/60 text-violet-300 border border-violet-500/30 px-1.5 py-0.5 rounded">COPY</span>';
-            } else {
-                badge = '<span class="text-[9px] bg-blue-900/60 text-blue-300 border border-blue-500/30 px-1.5 py-0.5 rounded">AUTO</span>';
-            }
+            const badge = type === 'copy'
+                ? '<span class="text-[9px] bg-violet-900/60 text-violet-300 border border-violet-500/30 px-1.5 py-0.5 rounded">COPY</span>'
+                : '<span class="text-[9px] bg-blue-900/60 text-blue-300 border border-blue-500/30 px-1.5 py-0.5 rounded">AUTO</span>';
             logEntry.innerHTML = `<div class="flex items-center gap-2"><span class="text-slate-500 shrink-0">[${timeString}]</span>${badge}</div><span class="text-slate-300 font-semibold truncate">"${message}"</span>`;
             if (searchLog.querySelector('.italic')) searchLog.innerHTML = '';
             searchLog.insertBefore(logEntry, searchLog.firstChild);
@@ -317,71 +468,50 @@
         function showToast() {
             toast.classList.remove('hidden');
             toast.classList.add('flex', 'toast-enter');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-                toast.classList.remove('flex', 'toast-enter');
-            }, 3000);
+            setTimeout(() => { toast.classList.add('hidden'); toast.classList.remove('flex', 'toast-enter'); }, 3000);
         }
 
-        // ================= THUẬT TOÁN TẠO DẤU VẾT GIẢ LẬP BING REWARD =================
         function generateCVID() {
             return [...Array(32)].map(() => Math.floor(Math.random() * 16).toString(16).toUpperCase()).join('');
         }
-
         function getRandomForm() {
             const forms = ['QBLH', 'QBRE', 'QSRE', 'WSBSRC', 'U523', 'ASPR'];
             return forms[Math.floor(Math.random() * forms.length)];
         }
-
         function getOrganicURL(keyword) {
             const cvid = generateCVID();
             const form = getRandomForm();
             const fakeSp = Math.floor(Math.random() * 5) + 1;
-            // spoof toàn bộ các tham số tracking của trình duyệt Edge thật
             return `https://www.bing.com/search?q=${encodeURIComponent(keyword)}&form=${form}&cvid=${cvid}&sp=${fakeSp}&qs=n&pq=${encodeURIComponent(keyword)}&sc=10-0&sk=`;
         }
-
         function getRandomKeyword() {
             if (keywords.length === 0) return "bing rewards";
             return keywords[Math.floor(Math.random() * keywords.length)];
         }
 
-        // ================= CHẠY TỰ ĐỘNG (SINGLE-TAB ENGINE) =================
         function executeAutoSearch() {
             const limit = parseInt(inputLimit.value) || 30;
-            if (searchCount >= limit) {
-                logActivity("Đã hoàn thành số lượng giới hạn tìm kiếm!", "auto");
-                stopAutoSearch();
-                return;
-            }
-
+            if (searchCount >= limit) { logActivity("Đã hoàn thành số lượng giới hạn tìm kiếm!", "auto"); stopAutoSearch(); return; }
             const keyword = getRandomKeyword();
             const url = getOrganicURL(keyword);
-
-            // BÍ QUYẾT TRÙM: Tái sử dụng cùng một tab có tên "bing_search_session"
-            // Cách này mô phỏng người dùng gõ tìm kiếm tiếp tục trên tab đó, không sinh ra hàng chục tab rác
             if (!childWindow || childWindow.closed) {
                 childWindow = window.open(url, 'bing_search_session', 'noopener=false,noreferrer=false');
             } else {
                 childWindow.location.href = url;
             }
-
             searchCount++;
             logActivity(`${searchCount}/${limit} - ${keyword}`, "auto");
         }
 
         function updateProgress() {
-            const maxOffset = 390; // Chu vi của vòng tròn r=62
+            const maxOffset = 390;
             const percent = countdownValue / currentInterval;
-            const offset = maxOffset - (percent * maxOffset);
-            progressBar.style.strokeDashoffset = offset;
+            progressBar.style.strokeDashoffset = maxOffset - (percent * maxOffset);
         }
 
         function getNextInterval() {
             const val = selectInterval.value;
-            if (val === 'random') {
-                return Math.floor(Math.random() * (45 - 15 + 1)) + 15; // Ngẫu nhiên 15s đến 45s
-            }
+            if (val === 'random') return Math.floor(Math.random() * (45 - 15 + 1)) + 15;
             return parseInt(val) || 15;
         }
 
@@ -389,7 +519,6 @@
             countdownValue--;
             countdownText.innerText = `${countdownValue}s`;
             updateProgress();
-
             if (countdownValue <= 0) {
                 executeAutoSearch();
                 currentInterval = getNextInterval();
@@ -403,17 +532,13 @@
             btnToggleAuto.innerHTML = `<i data-lucide="pause-circle" class="w-5 h-5"></i><span>Tạm Dừng Auto</span>`;
             btnToggleAuto.classList.remove('bg-blue-600', 'hover:bg-blue-500');
             btnToggleAuto.classList.add('bg-amber-600', 'hover:bg-amber-500');
-            
             currentInterval = getNextInterval();
             countdownValue = currentInterval;
             countdownText.innerText = `${countdownValue}s`;
             document.querySelector('#panel-auto span[id="countdown-text"] + span').innerText = "Tiếp theo";
             updateProgress();
-            
-            // Khóa cấu hình khi đang chạy
             selectInterval.disabled = true;
             inputLimit.disabled = true;
-
             autoTimer = setInterval(tick, 1000);
             lucide.createIcons();
         }
@@ -423,36 +548,21 @@
             btnToggleAuto.innerHTML = `<i data-lucide="play-circle" class="w-5 h-5"></i><span>Bắt Đầu Auto</span>`;
             btnToggleAuto.classList.remove('bg-amber-600', 'hover:bg-amber-500');
             btnToggleAuto.classList.add('bg-blue-600', 'hover:bg-blue-500');
-            
             countdownText.innerText = "15s";
             document.querySelector('#panel-auto span[id="countdown-text"] + span').innerText = "Đang dừng";
             progressBar.style.strokeDashoffset = 0;
-
             selectInterval.disabled = false;
             inputLimit.disabled = false;
-
             if (autoTimer) clearInterval(autoTimer);
             lucide.createIcons();
         }
 
-        btnToggleAuto.addEventListener('click', () => {
-            if (isAutoRunning) {
-                stopAutoSearch();
-            } else {
-                startAutoSearch();
-            }
-        });
-
+        btnToggleAuto.addEventListener('click', () => { isAutoRunning ? stopAutoSearch() : startAutoSearch(); });
         btnTriggerSingle.addEventListener('click', () => {
             executeAutoSearch();
-            if (isAutoRunning) {
-                currentInterval = getNextInterval();
-                countdownValue = currentInterval;
-                updateProgress();
-            }
+            if (isAutoRunning) { currentInterval = getNextInterval(); countdownValue = currentInterval; updateProgress(); }
         });
 
-        // ================= TẠO PANEL TAB 2 (COPY PASTE VÔ HÌNH) =================
         function generateSuperPanels() {
             superLinksContainer.innerHTML = '';
             let temp = [...keywords];
@@ -461,7 +571,6 @@
                 if (temp.length === 0) break;
                 selected.push(temp.splice(Math.floor(Math.random() * temp.length), 1)[0]);
             }
-
             selected.forEach((kw, idx) => {
                 const btn = document.createElement('button');
                 btn.className = "w-full text-left bg-slate-900 border border-slate-800 hover:border-violet-500/50 p-3.5 rounded-xl flex items-center justify-between group transition-all duration-200 cursor-pointer";
@@ -470,8 +579,7 @@
                         <span class="w-6 h-6 rounded-lg bg-slate-800 text-[11px] font-bold text-slate-400 flex items-center justify-center group-hover:bg-violet-600 group-hover:text-white shrink-0">${idx + 1}</span>
                         <span class="text-xs font-semibold text-slate-300 group-hover:text-violet-300 truncate">"${kw}"</span>
                     </div>
-                    <i data-lucide="copy" class="w-4 h-4 text-slate-500 group-hover:text-violet-400 shrink-0"></i>
-                `;
+                    <i data-lucide="copy" class="w-4 h-4 text-slate-500 group-hover:text-violet-400 shrink-0"></i>`;
                 btn.onclick = () => {
                     navigator.clipboard.writeText(kw).then(() => {
                         logActivity(kw, 'copy');
@@ -487,7 +595,6 @@
 
         btnRefreshSuper.addEventListener('click', generateSuperPanels);
 
-        // ================= CHUYỂN TAB ĐIỀU KHIỂN =================
         tabSuperBtn.addEventListener('click', () => {
             tabSuperBtn.className = "flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 bg-violet-600 text-white shadow-lg shadow-violet-900/20";
             tabAutoBtn.className = "flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200";
@@ -502,7 +609,6 @@
             panelAuto.classList.remove('hidden');
         });
 
-        // Khởi chạy
         window.addEventListener('DOMContentLoaded', () => {
             renderKeywords();
             generateSuperPanels();
